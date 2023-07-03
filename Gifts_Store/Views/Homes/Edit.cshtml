@@ -1,0 +1,80 @@
+﻿@model Gifts_Store.Models.Home
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Edit</title>
+</head>
+<body>
+
+<h4>Home</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" enctype="multipart/form-data">
+                @*<div asp-validation-summary="ModelOnly" class="text-danger"></div>*@
+                <div asp-validation-summary="All" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="LogoPath" class="control-label"></label>
+                <input asp-for="LogoPath" class="form-control" />
+                <span asp-validation-for="LogoPath" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <img src="@Url.Content("~/images/" +  Model.LogoPath)" width="100" height="100" alt="logo image" />
+            </div>
+            <div class="form-group">
+                <label asp-for="ImageLogo" class="control-label"></label>
+                <input asp-for="ImageLogo" class="form-control" />
+                <span asp-validation-for="ImageLogo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BackgroundPath" class="control-label"></label>
+                <input asp-for="BackgroundPath" class="form-control" />
+                <span asp-validation-for="BackgroundPath" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <img src="@Url.Content("~/images/" +  Model.BackgroundPath)" width="100" height="100" alt="background image" />
+            </div>
+            <div class="form-group">
+                <label asp-for="ImageBackground" class="control-label"></label>
+                <input asp-for="ImageBackground" class="form-control" />
+                <span asp-validation-for="ImageBackground" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SiteName" class="control-label"></label>
+                <input asp-for="SiteName" class="form-control" />
+                <span asp-validation-for="SiteName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="WelcomeText" class="control-label"></label>
+                <input asp-for="WelcomeText" class="form-control" />
+                <span asp-validation-for="WelcomeText" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AdminId" class="control-label"></label>
+                <select asp-for="AdminId" class="form-control" asp-items="ViewBag.AdminId"></select>
+                <span asp-validation-for="AdminId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+</body>
+</html>

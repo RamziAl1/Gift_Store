@@ -1,0 +1,85 @@
+﻿@model Gift
+@{
+    ViewData["Title"] = "Gift Details";
+    Layout = "~/Views/Shared/_MakerLayout.cshtml";
+}
+
+<div class="container" style="padding-top: 12rem;">
+    <div class="row justify-content-center align-items-center" >
+    
+       <div class="col-md-12">
+           <div class="row justify-content-center align-items-center">
+                <div class="col-md-7">
+                    <center ><h2>Gift details</h2></center>
+                </div>
+           </div>
+       </div>
+        <br />
+        <div class="col-md-12 justify-content-center align-items-center">
+            <div class="form-group row justify-content-center">
+                <label class="col-sm-2 col-form-label font-weight-bold">Added Date</label>
+                <div class="col-sm-5">
+                    <div class="form-control border-0 text-dark">
+                        @Model.AddedDate.ToString("yyyy-MM-dd")
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row justify-content-center">
+                <label class="col-sm-2 col-form-label font-weight-bold">Name</label>
+                <div class="col-sm-5">
+                    <div class="form-control border-0 text-dark">
+                        @Model.Name
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row justify-content-center">
+                <label class="col-sm-2 col-form-label font-weight-bold">Price</label>
+                <div class="col-sm-5">
+                    <div class="form-control border-0 text-dark">
+                        @Model.Price
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row justify-content-center">
+                <label class="col-sm-2 col-form-label font-weight-bold">Sale</label>
+                <div class="col-sm-5">
+                    <div class="form-control border-0 text-dark">
+                        @Model.Sale
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row justify-content-center">
+                <label class="col-sm-2 col-form-label font-weight-bold">Quantity</label>
+                <div class="col-sm-5">
+                    <div class="form-control border-0 text-dark">
+                        @Model.Quantity
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row justify-content-center">
+                <label class="col-sm-2 col-form-label font-weight-bold">Gift Photo</label>
+                <div class="col-sm-5">
+                    <img src="@Url.Content("~/images/" +  Model.ImagePath)" width="100" height="100" alt="gift image" />
+                </div>
+            </div>
+
+            <div class="form-group row justify-content-center">
+                <label class="col-sm-2 col-form-label font-weight-bold">Category</label>
+                <div class="col-sm-5">
+                    @Model.Category?.CategoryName
+                </div>
+            </div>
+            <div class="form-group row justify-content-center">
+                <div class="col-md-7">
+                    <center><a asp-action="MyProducts" class="primary-btn col-sm-10">Back to List</a></center>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

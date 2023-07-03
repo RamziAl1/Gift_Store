@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Testimonial>
+@{
+    ViewData["Title"] = "Testimonials";
+	var RoleId = Context.Session.GetInt32("RoleId");
+	if (RoleId == 2)
+		Layout = "~/Views/Shared/_MakerLayout.cshtml";
+	else if (RoleId == 3)
+		Layout = "~/Views/Shared/_SenderLayout.cshtml";
+	else if (RoleId == 4)
+		Layout = "~/Views/Shared/_GuestLayout.cshtml";
+}
+
+<section class="mt-5 pt-5">
+	<div class="container py-5">
+		<div class="row d-flex justify-content-center pt-5">
+			<div class="col-md-10 col-xl-8 text-center">
+				<h2 class="fw-bold mb-4">Testimonials</h2>
+			</div>
+		</div>
+
+		<div class="row text-center">
+			<!--card-->
+			@foreach (var item in Model)
+			{
+				<div class="col-md-4 mb-4">
+					<div class="card">
+						<div class="card-body py-4 mt-2 shadow">
+							<h4 class="font-weight-bold">@item?.User?.Fname @item?.User?.Lname </h4>
+							<p class="mb-2">
+								<i class="fas fa-quote-left pe-2"></i>@item?.Messege
+							</p>
+						</div>
+					</div>
+				</div>
+			}
+		</div>
+	</div>
+</section>
+

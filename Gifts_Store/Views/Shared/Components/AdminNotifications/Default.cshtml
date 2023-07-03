@@ -1,0 +1,27 @@
+﻿@model Gifts_Store.Models.NotificationsViewModel
+
+<!-- Notifications Dropdown Menu -->
+<li class="nav-item dropdown">
+    <a class="nav-link" data-toggle="dropdown" href="#">
+        <i class="far fa-bell"></i>
+        @{
+            if(Model != null && Model.Count != 0)
+            {
+                <span class="badge badge-warning navbar-badge">@Model.Count</span>
+            }
+        }
+    </a>
+    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+        <span class="dropdown-item dropdown-header">@Model?.Count Notifications</span>
+        <div class="dropdown-divider"></div>
+        @{
+            if (Model != null && Model.Count != 0 && Model.Notifications != null)
+                foreach(var item in Model.Notifications)
+                {
+                    <a asp-controller="@item.Second[0]" asp-action="@item.Second[1]" class="dropdown-item text-wrap">
+                        <i class="fas fa-user mr-2"></i> @item.First
+                    </a>
+                }
+        }
+    </div>
+</li>

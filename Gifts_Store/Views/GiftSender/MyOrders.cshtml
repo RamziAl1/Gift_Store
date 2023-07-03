@@ -1,0 +1,176 @@
+﻿@model IEnumerable<Tuple<Orderr, Gift>>
+@{
+    ViewData["Title"] = "MyOrders";
+    Layout = "~/Views/Shared/_SenderLayout.cshtml";
+}
+
+<section class="checkout_area section_gap" style="padding-top: 12rem; padding-bottom: 4rem;">
+    @if (TempData["TransactionSuccessStatus"] != null)
+    {
+        <section class="order_details section_gap">
+            <div class="container">
+                <h3 class="title_confirmation">Thank you. Your payment has been received.</h3>
+            </div>
+        </section>
+    }
+    <div class="container justify-content-center">
+        <center><h2>My orders</h2></center>
+        <div class="billing_details">
+            @foreach (var item in Model)
+            {
+                <div class="row pt-5">
+                    <div class="col-lg-8">
+                        <div class="card">
+                            <div class="card-body contact_form mb-5">
+                                <center><h3>Order details</h3></center>
+                                <br />
+                                <div class="form-group row justify-content-center">
+                                    <label class="col-sm-4 col-form-label font-weight-bold">Order date</label>
+                                    <div class="col-sm-6">
+                                        <div class="form-control border-0 text-dark">
+                                            @item.Item1.OrderDate.ToString("yyyy-MM-dd")
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row justify-content-center">
+                                    <label class="col-sm-4 col-form-label font-weight-bold">Expected arrival date</label>
+                                    <div class="col-sm-6">
+                                        <div class="form-control border-0 text-dark">
+                                            @item.Item1.ExpectedArrivalDate.ToString("yyyy-MM-dd")
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row justify-content-center">
+                                    <label class="col-sm-4 col-form-label font-weight-bold">Address</label>
+                                    <div class="col-sm-6">
+                                        <div class="form-control border-0 text-dark">
+                                            @item.Item1.Address
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row justify-content-center">
+                                    <label class="col-sm-4 col-form-label font-weight-bold">Quantity</label>
+                                    <div class="col-sm-6">
+                                        <div class="form-control border-0 text-dark">
+                                            @item.Item1.Quantity
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row justify-content-center">
+                                    <label class="col-sm-4 col-form-label font-weight-bold">Approval status</label>
+                                    <div class="col-sm-6">
+                                        <div class="form-control border-0 text-dark">
+                                            @item.Item1.Status
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row justify-content-center">
+                                    <label class="col-sm-4 col-form-label font-weight-bold">Payment status</label>
+                                    <div class="col-sm-6">
+                                        <div class="form-control border-0 text-dark">
+                                            @if (item.Item1.PaymentMade != null && (bool)item.Item1.PaymentMade)
+                                            {
+                                                <div>Payed</div>
+                                            }
+                                            else
+                                            {
+                                                <div>Not payed</div>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row justify-content-center">
+                                    <label class="col-sm-4 col-form-label font-weight-bold">Arrival status</label>
+                                    <div class="col-sm-6">
+                                        <div class="form-control border-0 text-dark">
+                                            @if (item.Item1.HasArrived != null && (bool)item.Item1.HasArrived)
+                                            {
+                                                <div>Arrived</div>
+                                            }
+                                            else
+                                            {
+                                                <div>Not arrived</div>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row justify-content-center">
+                                    <label class="col-sm-4 col-form-label font-weight-bold">Total price</label>
+                                    <div class="col-sm-6">
+                                        <div class="form-control border-0 text-dark">
+                                            $@item.Item1.TotalPrice
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 parent">
+                        <div class="order_box child h-100">
+                            <div class="single-product">
+                                <img class="img" src="@Url.Content("~/images/" + item.Item2.ImagePath)" width="200" height="140" alt="gift image">
+                                <div class="product-details">
+                                    <h6>
+                                        @item.Item2.Name
+                                    </h6>
+                                    <div class="price">
+                                        @if (item.Item2.Sale != 0)
+                                        {
+                                            var priceOnSale = Math.Round((double)item.Item2.Price * (1.0 - (double)item.Item2.Sale / 100), 2);
+                                            <h6>$@Html.Raw(priceOnSale.ToString())</h6>
+                                            <h6 class="l-through">$@Html.Raw(((double)item.Item2.Price).ToString())</h6>
+                                        }
+                                        else
+                                        {
+                                            <h6>$@Html.Raw(((double)item.Item2.Price).ToString())</h6>
+                                        }
+                                        <hr />
+                                        <h6>Order Quantity: @item.Item1.Quantity</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            @if (item.Item1.Status == "approved" && item.Item1.PaymentMade == false)
+                            {
+                                <div class="row justify-content-center py-5">
+                                    <div class="col-sm-6 justify-content-center parent-element">
+                                        <form method="get" asp-controller="GiftSender" asp-action="MakePayment">
+                                            <input type="hidden" name="id" asp-for="@item.Item1.Id" />
+                                            <button type="submit" class="primary-btn child-element w-100 d-block" style="border:none;">Payment</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            }
+                            else if (item.Item1.PaymentMade == true && item.Item1.HasArrived == false)
+                            {
+                                <div class="row justify-content-center py-5">
+                                    <div class="col-sm-6 justify-content-center parent-element">
+                                        <div class="genric-btn success child-element w-100 d-block">Payment done</div>
+                                    </div>
+                                </div>
+                            }
+                            else if (item.Item1.HasArrived == true)
+                            {
+                                <div class="row justify-content-center py-5">
+                                    <div class="col-sm-6 justify-content-center parent-element">
+                                        <div class="genric-btn info child-element w-100 d-block">Arrived</div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                        
+                    </div>
+                </div>
+                
+            }
+        </div>
+    </div>
+</section>
+

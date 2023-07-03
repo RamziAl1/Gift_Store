@@ -1,0 +1,269 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="~/AdminAssets/plugins/fontawesome-free/css/all.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Tempusdominus Bootstrap 4 -->
+    <link rel="stylesheet" href="~/AdminAssets/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+    <!-- iCheck -->
+    <link rel="stylesheet" href="~/AdminAssets/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <!-- JQVMap -->
+    <link rel="stylesheet" href="~/AdminAssets/plugins/jqvmap/jqvmap.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/AdminAssets/dist/css/adminlte.min.css">
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet" href="~/AdminAssets/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+    <!-- Daterange picker -->
+    <link rel="stylesheet" href="~/AdminAssets/plugins/daterangepicker/daterangepicker.css">
+    <!-- summernote -->
+    <link rel="stylesheet" href="~/AdminAssets/plugins/summernote/summernote-bs4.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
+</head>
+
+<body class="hold-transition sidebar-mini layout-fixed">
+    <div class="wrapper">
+
+        <!-- Preloader -->
+        <div class="preloader flex-column justify-content-center align-items-center">
+            <div class="animation__shake">
+                @await Component.InvokeAsync("Logo")
+            </div>
+            @*<img class="animation__shake" src="~/AdminAssets/dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">*@
+        </div>
+
+        <!-- Navbar -->
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+            <!-- Left navbar links -->
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+                </li>
+            </ul>
+
+            <!-- Right navbar links -->
+            <ul class="navbar-nav ml-auto">              
+                @await Component.InvokeAsync("AdminNotifications")
+                
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+                        <i class="fas fa-expand-arrows-alt"></i>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <!-- /.navbar -->
+        <!-- Main Sidebar Container -->
+        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+            <!-- Brand Logo -->
+            <a href="index3.html" class="brand-link">
+                <div class="brand-image img-circle elevation-3 d-block mb-4">
+                    @await Component.InvokeAsync("Logo")
+                </div>
+                <br />
+                <br />
+                <span class="brand-text font-weight-light"></span>
+            </a>
+
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <!-- Sidebar Menu -->
+                <nav class="mt-2">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Admin" asp-action="Dashboard">
+                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <p>
+                                    Dashboard
+                                </p>
+                            </a>   
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Categories" asp-action="Index">
+                                <i class="nav-icon fas fa-gifts"></i>
+                                <p>
+                                    Gift Categories
+                                </p>
+                            </a>   
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Admin" asp-action="GiftsWithCategories">
+                                <i class="nav-icon fas fa-gift"></i>
+                                <p>
+                                    Gifts
+                                </p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Userrs" asp-action="Index">
+                                <i class="nav-icon fas fa-users"></i>
+                                <p>
+                                    Users
+                                </p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Admin" asp-action="PendingGiftMakers">
+                                <i class="nav-icon fas fa-users"></i>
+                                <p>
+                                    Pending gift makers
+                                </p>
+                            </a>
+                        </li>
+                        
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Testimonials" asp-action="Index">
+                                <i class="nav-icon fas fa-comment"></i>
+                                <p>
+                                    Testimonials
+                                </p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Homes" asp-action="Index">
+                                <i class="nav-icon fas fa-home"></i>
+                                <p>
+                                    Manage Home Page
+                                </p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="AboutUs" asp-action="Index">
+                                <i class="nav-icon fas fa-bars"></i>
+                                <p>
+                                    Manage About Us
+                                </p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="ContactUs" asp-action="Index">
+                                <i class="nav-icon fas fa-bars"></i>
+                                <p>
+                                    Manage Contact Us
+                                </p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="ContactUsEntries" asp-action="Index">
+                                <i class="nav-icon fas fa-comment"></i>
+                                <p>
+                                    Contact Us Entries
+                                </p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Admin" asp-action="MyProfile">
+                                <i class="nav-icon fas fa-users"></i>
+                                <p>
+                                    My Profile
+                                </p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Auth" asp-action="Logout" >
+                                <i class="nav-icon fas fa-regular fa-arrow-right-from-bracket"></i>
+                                <p>
+                                    Logout
+                                </p>
+                            </a>
+                        </li>                        
+                    </ul>
+                </nav>
+                <!-- /.sidebar-menu -->
+            </div>
+            <!-- /.sidebar -->
+        </aside>
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper p-4" >
+            @RenderBody()
+        </div>
+
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+        </aside>
+        <!-- /.control-sidebar -->
+    </div>
+    <!-- ./wrapper -->
+    <script>
+        document.getElementById('downloadButton').addEventListener('click', function () {
+            const element = document.getElementById('reportToPDF'); 
+
+            // Set the desired dimensions for the element
+            element.style.width = '100%'; 
+            element.style.height = 'auto'; 
+
+            var canvasElement = element.querySelector('#profitsChart');
+
+            // Set the desired dimensions for the element
+            canvasElement.style.width = '100%';
+            canvasElement.style.height = 'auto';
+
+            var formElement = element.querySelector('#financialReportForm');
+
+            html2pdf()
+                .from(element)
+                .save('Admin financial chart.pdf');
+        });
+    </script>
+
+    <!-- jQuery -->
+    <script src="~/AdminAssets/plugins/jquery/jquery.min.js"></script>
+    <!-- jQuery UI 1.11.4 -->
+    <script src="~/AdminAssets/plugins/jquery-ui/jquery-ui.min.js"></script>
+    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+    <script>
+        $.widget.bridge('uibutton', $.ui.button)
+    </script>
+    <!-- Bootstrap 4 -->
+    <script src="~/AdminAssets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- ChartJS -->
+    <script src="~/AdminAssets/plugins/chart.js/Chart.min.js"></script>
+    <!-- Sparkline -->
+    <script src="~/AdminAssets/plugins/sparklines/sparkline.js"></script>
+    <!-- JQVMap -->
+    <script src="~/AdminAssets/plugins/jqvmap/jquery.vmap.min.js"></script>
+    <script src="~/AdminAssets/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+    <!-- jQuery Knob Chart -->
+    <script src="~/AdminAssets/plugins/jquery-knob/jquery.knob.min.js"></script>
+    <!-- daterangepicker -->
+    <script src="~/AdminAssets/plugins/moment/moment.min.js"></script>
+    <script src="~/AdminAssets/plugins/daterangepicker/daterangepicker.js"></script>
+    <!-- Tempusdominus Bootstrap 4 -->
+    <script src="~/AdminAssets/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+    <!-- Summernote --> 
+    <script src="~/AdminAssets/plugins/summernote/summernote-bs4.min.js"></script>
+    <!-- overlayScrollbars -->
+    <script src="~/AdminAssets/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="~/AdminAssets/dist/js/adminlte.js"></script>
+    @*<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>*@
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+    @*<!-- AdminLTE for demo purposes -->
+    <script src="~/AdminAssets/dist/js/demo.js"></script>*@
+    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+    <script src="~/AdminAssets/dist/js/pages/dashboard.js"></script>
+    @RenderSection("Scripts", required: false) 
+</body>
+
+
+</html>

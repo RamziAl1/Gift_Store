@@ -1,0 +1,72 @@
+﻿@model Gifts_Store.Models.Gift
+
+@{
+    ViewData["Title"] = "Add Gift";
+    var RoleId = Context.Session.GetInt32("RoleId");
+    if (RoleId == 1)
+        Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    else if (RoleId == 2)
+        Layout = "~/Views/Shared/_MakerLayout.cshtml";
+    else if (RoleId == 3 || RoleId == 4)
+        Layout = "~/Views/Shared/_SenderLayout.cshtml";
+}
+
+<h1>Add Gift</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Sale" class="control-label"></label>
+                <input asp-for="Sale" class="form-control" />
+                <span asp-validation-for="Sale" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Quantity" class="control-label"></label>
+                <input asp-for="Quantity" class="form-control" />
+                <span asp-validation-for="Quantity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ImageFile" class="control-label"></label>
+                <input asp-for="ImageFile" class="form-control" required />
+                <span asp-validation-for="ImageFile" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AddedDate" class="control-label"></label>
+                <input asp-for="AddedDate" class="form-control" />
+                <span asp-validation-for="AddedDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CategoryId" class="control-label"></label>
+                <select asp-for="CategoryId" class ="form-control" asp-items="ViewBag.CategoryId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="GiftMakerId" class="control-label"></label>
+                <select asp-for="GiftMakerId" class ="form-control" asp-items="ViewBag.GiftMakerId"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

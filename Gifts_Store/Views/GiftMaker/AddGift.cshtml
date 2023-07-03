@@ -1,0 +1,53 @@
+﻿@model Gifts_Store.Models.Gift
+@{
+    ViewData["Title"] = "Add Gift";
+    Layout = "~/Views/Shared/_MakerLayout.cshtml";
+}
+
+    
+<div class="row" style="padding-top: 12rem;">
+    <h2 class="col-md-12 d-flex justify-content-center align-items-center">Add Gift</h2>
+    <div class="col-md-12 d-flex justify-content-center align-items-center">
+        
+        <form asp-controller="GiftMaker" asp-action="AddGift" enctype="multipart/form-data" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Sale" class="control-label"></label>
+                <input asp-for="Sale" class="form-control" />
+                <span asp-validation-for="Sale" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Quantity" class="control-label"></label>
+                <input asp-for="Quantity" class="form-control" />
+                <span asp-validation-for="Quantity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ImageFile" class="control-label"></label>
+                <input asp-for="ImageFile" class="form-control" />
+                <span asp-validation-for="ImageFile" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Add" class="primary-btn" style="border: none;" />
+            </div>
+            <a asp-action="MyProducts" class="primary-btn">Back to List</a>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+

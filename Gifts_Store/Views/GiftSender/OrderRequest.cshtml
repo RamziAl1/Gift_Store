@@ -1,0 +1,120 @@
+﻿@model Tuple<Orderr, Gift>
+@{
+    ViewData["Title"] = "Order Request";
+    Layout = "~/Views/Shared/_SenderLayout.cshtml";
+}
+
+<!-- Start Banner Area -->
+<section class="banner-area organic-breadcrumb">
+    <div class="container">
+        <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+            <div class="col-first">
+                <h1>Order request</h1>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Banner Area -->
+<!--================Checkout Area =================-->
+<section class="checkout_area section_gap" style="padding-top: 12rem; padding-bottom: 4rem;">
+    <div class="container justify-content-center">
+        <div class="billing_details">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="card">
+                        <form asp-action="OrderRequest" class="card-body contact_form mb-5">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                            <center><h3>Order Request details</h3></center>
+                            <br />
+
+                            <div class="form-group row justify-content-center">
+                                <label asp-for="Item1.Address" class="col-sm-4 col-form-label font-weight-bold"></label>
+                                <input asp-for="Item1.Address" class="form-control col-sm-6 text-dark" />
+                                <span asp-validation-for="Item1.Address" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group row justify-content-center">
+                                <label asp-for="Item1.Quantity" class="col-sm-4 col-form-label font-weight-bold"></label>
+                                <input asp-for="Item1.Quantity" class="form-control col-sm-6 text-dark" type="number" value="1" min="1" max="@Model.Item2.Quantity.ToString()" id="quantityInput" />
+                                <span asp-validation-for="Item1.Quantity" class="text-danger"></span>
+                            </div>
+                            <div class="form-group row justify-content-center">
+                                <label for="totalPrice" class="col-sm-4 col-form-label font-weight-bold">Total Price</label>
+                                <div class="col-sm-6">
+                                    <div class="form-control border-0 text-dark" id="totalPriceDisplay">
+                                        @{
+                                            if (Model.Item2.Sale != 0)
+                                            {
+                                                var priceOnSale = Math.Round((double)Model.Item2.Price * (1.0 - (double)Model.Item2.Sale / 100), 2);
+                                                <div>$@Html.Raw((priceOnSale).ToString())</div>
+                                            }
+                                            else
+                                            {
+                                                <div>$@Html.Raw(((double)Model.Item2.Price).ToString())</div>
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group row justify-content-center" >
+                                <div class="offset-sm-4 col-sm-6">
+                                    <button type="submit" class="primary-btn" style="border:none">Save</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="order_box">
+                        <div class="single-product">
+                            <img class="img" src="@Url.Content("~/images/" + Model.Item2.ImagePath)" width="200" height="140" alt="gift image">
+                            <div class="product-details">
+                                <h6>
+                                    @Model.Item2.Name
+                                </h6>
+                                <div class="price">
+                                    @if (Model.Item2.Sale != 0)
+                                    {
+                                        var priceOnSale = Math.Round((double)Model.Item2.Price * (1.0 - (double)Model.Item2.Sale / 100), 2);
+                                        <h6>$@Html.Raw(priceOnSale.ToString())</h6>
+                                        <h6 class="l-through">$@Html.Raw(((double)Model.Item2.Price).ToString())</h6>
+                                    }
+                                    else
+                                    {
+                                        <h6>$@Html.Raw(((double)Model.Item2.Price).ToString())</h6>
+                                    }
+                                    <hr />
+                                    <h6>Available Quantity: @Model.Item2.Quantity</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+    var quantityInput = document.getElementById('quantityInput');
+    var totalPriceDisplay = document.getElementById('totalPriceDisplay');
+    var price = parseFloat("@Model.Item2.Price");
+    var sale = parseFloat("@Model.Item2.Sale");
+
+    quantityInput.addEventListener('input', updateTotalPrice);
+
+    function updateTotalPrice() {
+        var quantity = parseInt(quantityInput.value);
+
+        if (sale !== 0) {
+            var priceOnSale = Math.round(price * (1 - sale / 100) * quantity * 100) / 100;
+            totalPriceDisplay.innerHTML = '$' + priceOnSale.toFixed(2);
+        } else {
+            var totalPrice = Math.round(price * quantity * 100) / 100;
+            totalPriceDisplay.innerHTML = '$' + totalPrice.toFixed(2);
+        }
+    }
+</script>
+<!--================End Checkout Area =================-->
+

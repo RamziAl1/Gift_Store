@@ -1,0 +1,469 @@
+is_global = true
+build_property.TargetFramework = net6.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = Gifts_Store
+build_property.RootNamespace = Gifts_Store
+build_property.ProjectDir = F:\TAH\0) First project\Gifts_Store\Gifts_Store\
+build_property.RazorLangVersion = 6.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = true
+build_property.MSBuildProjectDirectory = F:\TAH\0) First project\Gifts_Store\Gifts_Store
+build_property._RazorSourceGeneratorDebug = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/AboutUs/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWJvdXRVc1xDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/AboutUs/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWJvdXRVc1xEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/AboutUs/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWJvdXRVc1xEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/AboutUs/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWJvdXRVc1xFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/AboutUs/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWJvdXRVc1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/Adminns/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5uc1xDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/Adminns/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5uc1xEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/Adminns/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5uc1xEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/Adminns/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5uc1xFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/Adminns/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5uc1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/Admin/Dashboard.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRGFzaGJvYXJkLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/Admin/EditProfile.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRWRpdFByb2ZpbGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/Admin/GiftsWithCategories.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cR2lmdHNXaXRoQ2F0ZWdvcmllcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/Admin/MyProfile.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cTXlQcm9maWxlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/Admin/PendingGiftMakers.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cUGVuZGluZ0dpZnRNYWtlcnMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/Auth/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0aFxMb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/Auth/Register.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0aFxSZWdpc3Rlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/Categories/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2F0ZWdvcmllc1xDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/Categories/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2F0ZWdvcmllc1xEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/Categories/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2F0ZWdvcmllc1xEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/Categories/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2F0ZWdvcmllc1xFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/Categories/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2F0ZWdvcmllc1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/ContactUsEntries/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udGFjdFVzRW50cmllc1xDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/ContactUsEntries/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udGFjdFVzRW50cmllc1xEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/ContactUsEntries/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udGFjdFVzRW50cmllc1xEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/ContactUsEntries/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udGFjdFVzRW50cmllc1xFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/ContactUsEntries/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udGFjdFVzRW50cmllc1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/ContactUs/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udGFjdFVzXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/ContactUs/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udGFjdFVzXERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/ContactUs/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udGFjdFVzXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/ContactUs/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udGFjdFVzXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/ContactUs/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udGFjdFVzXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/GiftMakers/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2lmdE1ha2Vyc1xDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/GiftMakers/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2lmdE1ha2Vyc1xEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/GiftMakers/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2lmdE1ha2Vyc1xEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/GiftMakers/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2lmdE1ha2Vyc1xFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/GiftMakers/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2lmdE1ha2Vyc1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/GiftMaker/AddGift.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2lmdE1ha2VyXEFkZEdpZnQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/GiftMaker/EditGift.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2lmdE1ha2VyXEVkaXRHaWZ0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/GiftMaker/EditProfile.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2lmdE1ha2VyXEVkaXRQcm9maWxlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/GiftMaker/GiftDetails.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2lmdE1ha2VyXEdpZnREZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/GiftMaker/MyOrders.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2lmdE1ha2VyXE15T3JkZXJzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/GiftMaker/MyProducts.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2lmdE1ha2VyXE15UHJvZHVjdHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/GiftMaker/MyProfile.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2lmdE1ha2VyXE15UHJvZmlsZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/GiftMaker/MyTestimonial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2lmdE1ha2VyXE15VGVzdGltb25pYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/GiftSenders/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2lmdFNlbmRlcnNcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/GiftSenders/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2lmdFNlbmRlcnNcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/GiftSenders/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2lmdFNlbmRlcnNcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/GiftSenders/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2lmdFNlbmRlcnNcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/GiftSenders/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2lmdFNlbmRlcnNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/GiftSender/BrowseGifts.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2lmdFNlbmRlclxCcm93c2VHaWZ0cy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/GiftSender/EditProfile.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2lmdFNlbmRlclxFZGl0UHJvZmlsZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/GiftSender/MakePayment.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2lmdFNlbmRlclxNYWtlUGF5bWVudC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/GiftSender/MyOrders.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2lmdFNlbmRlclxNeU9yZGVycy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/GiftSender/MyProfile.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2lmdFNlbmRlclxNeVByb2ZpbGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/GiftSender/MyTestimonial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2lmdFNlbmRlclxNeVRlc3RpbW9uaWFsLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/GiftSender/OrderRequest.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2lmdFNlbmRlclxPcmRlclJlcXVlc3QuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/Gifts/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2lmdHNcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/Gifts/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2lmdHNcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/Gifts/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2lmdHNcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/Gifts/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2lmdHNcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/Gifts/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2lmdHNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/Guest/BrowseGifts.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR3Vlc3RcQnJvd3NlR2lmdHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/Homes/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZXNcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/Homes/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZXNcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/Homes/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZXNcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/Homes/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZXNcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/Homes/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZXNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/Home/AboutUs.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxBYm91dFVzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/Home/ContactUs.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxDb250YWN0VXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/Home/Home.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxIb21lLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/Home/Testimonials.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxUZXN0aW1vbmlhbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/Orderrs/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJyc1xDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/Orderrs/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJyc1xEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/Orderrs/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJyc1xEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/Orderrs/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJyc1xFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/Orderrs/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJyc1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/Rolees/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUm9sZWVzXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/Rolees/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUm9sZWVzXERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/Rolees/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUm9sZWVzXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/Rolees/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUm9sZWVzXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/Rolees/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUm9sZWVzXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/Shared/Components/AdminNotifications/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcQWRtaW5Ob3RpZmljYXRpb25zXERlZmF1bHQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/Shared/Components/Logo/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcTG9nb1xEZWZhdWx0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/Shared/Components/MakerNotifications/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcTWFrZXJOb3RpZmljYXRpb25zXERlZmF1bHQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/Shared/_AdminLayout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9BZG1pbkxheW91dC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/Shared/_GuestLayout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9HdWVzdExheW91dC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/Shared/_MakerLayout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9NYWtlckxheW91dC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/Shared/_SenderLayout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9TZW5kZXJMYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/Testimonials/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVzdGltb25pYWxzXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/Testimonials/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVzdGltb25pYWxzXERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/Testimonials/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVzdGltb25pYWxzXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/Testimonials/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVzdGltb25pYWxzXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/Testimonials/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVzdGltb25pYWxzXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/UserLogins/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlckxvZ2luc1xDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/UserLogins/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlckxvZ2luc1xEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/UserLogins/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlckxvZ2luc1xEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/UserLogins/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlckxvZ2luc1xFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/UserLogins/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlckxvZ2luc1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/Userrs/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnJzXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/Userrs/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnJzXERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/Userrs/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnJzXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/Userrs/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnJzXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/Userrs/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnJzXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/VisaInfoes/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmlzYUluZm9lc1xDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/VisaInfoes/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmlzYUluZm9lc1xEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/VisaInfoes/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmlzYUluZm9lc1xEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/VisaInfoes/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmlzYUluZm9lc1xFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/VisaInfoes/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmlzYUluZm9lc1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/TAH/0) First project/Gifts_Store/Gifts_Store/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 

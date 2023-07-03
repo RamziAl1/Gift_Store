@@ -1,0 +1,88 @@
+﻿@model Tuple<IEnumerable<Gift>, string>
+
+@{
+    ViewData["Title"] = "My Products";
+    Layout = "~/Views/Shared/_MakerLayout.cshtml";
+}
+
+<!-- start product Area -->
+<section class="product-area section_gap" style="padding-top: 12rem;">
+	<!-- single product slide -->
+	<div class="single-product-slider">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-lg-6 text-center">
+					<div class="section-title">
+						<h2>My Products</h2>
+						<h2>@Model.Item2</h2>
+						<p>
+							<a asp-action="AddGift" class="genric-btn link radius">Add gift</a>
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				@{
+					foreach(var item in Model.Item1)
+					{
+						<!-- single product -->
+						<div class="col-lg-3 col-md-6">
+							<div class="single-product">
+								<img class="img" src="@Url.Content("~/images/" + item.ImagePath)" width="200" height="140" alt="gift image">
+								<div class="product-details">
+									<h6>
+										@item.Name
+									</h6>
+									<div class="price">
+										@if (item.Sale != 0)
+										{
+											var priceOnSale = Math.Round((double)item.Price * (1.0 - (double)item.Sale / 100), 2);
+											<h6>$@Html.Raw(priceOnSale.ToString())</h6>
+											<h6 class="l-through">$@Html.Raw(((double)item.Price).ToString())</h6>
+										}
+										else
+										{
+											<h6>$@Html.Raw(((double)item.Price).ToString())</h6>
+										}
+										<hr />
+										<h6>Quantity: @item.Quantity</h6>
+
+
+									</div>
+									<div class="prd-bottom">
+										<form asp-controller="GiftMaker" asp-action="EditGift" class="social-info" method="get">
+											<input type="hidden" name="id" asp-for="@item.Id" />
+											<button type="submit" style="border: none; background-color:transparent">
+												<span class="ti-pencil-alt"></span>
+												<p class="hover-text">Edit</p>
+											</button>
+											
+										</form>
+										<form asp-controller="GiftMaker" asp-action="GiftDetails" class="social-info" method="get">
+											<input type="hidden" name="id" asp-for="@item.Id" />
+											<button type="submit" style="border: none; background-color:transparent">
+												<span class="ti-info"></span>
+												<p class="hover-text">Info</p>
+											</button>
+											
+										</form>
+										<form asp-controller="GiftMaker" asp-action="DeleteGift" asp-route-id="@item.Id" class="social-info" method="get">
+											<input type="hidden" name="id" asp-for="@item.Id" />
+											<button type="submit" style="border: none; background-color:transparent">
+												<span class="ti-trash"></span>
+												<p class="hover-text">Delete</p>
+											</button>
+											
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					}
+				}
+			</div>
+		</div>
+	</div>
+</section>
+<!-- end product Area -->
+

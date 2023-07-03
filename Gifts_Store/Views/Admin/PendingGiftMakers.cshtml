@@ -1,0 +1,78 @@
+﻿@model IEnumerable<Tuple<Userr, Category>>
+
+@{
+    ViewData["Title"] = "PendingGiftMakers";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Pending gift makers</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Item1.Fname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Item1.Lname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Item1.ImageFile)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Item1.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Item2.CategoryName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Item1.Fname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Item1.Lname)
+            </td>
+            <td>
+                <img src="@Url.Content("~/images/" + item.Item1.ImagePath)" width="100" height="100" alt="gift image" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Item1.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Item2.CategoryName)
+            </td>
+            <td>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <form method="post" asp-controller="Admin" asp-action="ApproveMaker">
+                            <input type="hidden" name="id" asp-for="@item.Item1.Id" />
+                            <button type="submit" class="btn btn-success">Approve</button>
+                        </form>
+                    </div>
+                    <div class="col-sm-6">
+                        <form method="post" asp-controller="Admin" asp-action="RejectMaker">
+                            <input type="hidden" name="id" asp-for="@item.Item1.Id" />
+                            <button type="submit" class="btn btn-danger">Reject</button>
+                        </form>
+                    </div>
+                </div>
+            </td>
+
+            @*<td>
+                <form asp-action="ApproveMaker">
+                        <input type="submit" value="Approve" class="btn btn-success" />
+                    <a asp-action="ApproveMaker" asp-route-id="@item.Item1.Id" class="btn btn-success">Approve</a> 
+                </form>
+                    |
+
+                    <a asp-action="RejectMaker" asp-route-id="@item.Item1.Id" class="btn btn-danger">Reject</a>
+            </td>*@
+        </tr>
+}
+    </tbody>
+</table>

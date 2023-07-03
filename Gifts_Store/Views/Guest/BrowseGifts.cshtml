@@ -1,0 +1,131 @@
+﻿@model IEnumerable<Gift>
+@{
+	ViewData["Title"] = "Browse Gifts";
+	Layout = "~/Views/Shared/_GuestLayout.cshtml";
+}
+
+<!-- Start Banner Area -->
+<section class="banner-area organic-breadcrumb">
+	<div class="container">
+		<div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+			<div class="col-first">
+				<h1>Browse Shop</h1>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- End Banner Area -->
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<center>
+					<h3 class="modal-title" id="exampleModalLongTitle">Guest user can't buy products</h3>
+				</center>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+
+				<center>
+					<h5>Must login to Buy products</h5>
+				</center>
+
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				<a asp-controller="Auth" asp-action="Login" class="btn btn-primary">Go to Login screen</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="container py-5">
+	<div class="row">
+		<div class="col-xl-3 col-lg-4 col-md-5">
+			<div class="sidebar-filter mt-50">
+				<form asp-controller="Guest" asp-action="BrowseGifts">
+					<div class="d-flex flex-row top-filter-head align-items-center justify-content-center">
+						<input class="form-control" name="giftName" placeholder="Search name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search name'"
+							   type="text">
+
+						<div class="col-lg-4 col-md-4">
+							<button class="bb-btn btn"><span class="lnr lnr-arrow-right"></span></button>
+						</div>
+					</div>
+					<div class="top-filter-head">Filter Categories</div>
+					<div class="common-filter">
+						<ul>
+							<li class="filter-list"><input class="pixel-radio" type="radio" id="All" name="giftCategory" value="All" checked><label for="All">All</label></li>
+							@{
+								if (ViewBag.Categories != null)
+									foreach (var item in ViewBag.Categories)
+									{
+										<li class="filter-list"><input class="pixel-radio" type="radio" id="@item.Value" name="giftCategory" value="@item.Value"><label for="@item.Value">@item.Text @item.Value</label></li>
+									}
+							}
+						</ul>
+					</div>
+				</form>
+			</div>
+		</div>
+		<div class="col-xl-9 col-lg-8 col-md-7">
+			<!-- Start Products List -->
+			<section class="lattest-product-area pb-40 category-list">
+				<div class="row">
+					@foreach (var item in Model)
+					{
+						<!-- single product -->
+						<div class="col-lg-4 col-md-6">
+							<div class="single-product">
+								<img class="img" src="@Url.Content("~/images/" + item.ImagePath)" width="200" height="140" alt="gift image">
+								<div class="product-details">
+									<h6>
+										@item.Name
+									</h6>
+									<div class="price">
+										@if (item.Sale != 0)
+										{
+											var priceOnSale = Math.Round((double)item.Price * (1.0 - (double)item.Sale / 100), 2);
+											<h6>$@Html.Raw(priceOnSale.ToString())</h6>
+											<h6 class="l-through">$@Html.Raw(((double)item.Price).ToString())</h6>
+										}
+										else
+										{
+											<h6>$@Html.Raw(((double)item.Price).ToString())</h6>
+										}
+										<hr />
+										<h6>Quantity: @item.Quantity</h6>
+									</div>
+									<div class="prd-bottom">
+										<a class="social-info openModalLink">
+											<div style="border: none; background-color:transparent">
+												<span class="ti-bag"></span>
+												<p class="hover-text">Order</p>
+											</div>
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					}
+				</div>
+			</section>
+			<!-- End Products List -->
+		</div>
+	</div>
+</div>
+
+<script src="~/HomeAssets/js/vendor/jquery-2.2.4.min.js"></script>
+<script>
+	$(document).ready(function () {
+		$('.openModalLink').click(function (e) {
+			e.preventDefault(); // Prevent the default link behavior
+
+			$('#exampleModalCenter').modal('show'); // Manually show the modal
+		});
+	});
+</script>

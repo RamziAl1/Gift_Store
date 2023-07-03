@@ -1,0 +1,74 @@
+﻿@model Tuple<Orderr, Gift,VisaInfo>
+@{
+    ViewData["Title"] = "MakePayment";
+    Layout = "~/Views/Shared/_SenderLayout.cshtml";
+}
+
+<section class="banner-area organic-breadcrumb">
+    <div class="container">
+        <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+            <div class="col-first">
+                <h1>Make payment</h1>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Banner Area -->
+<!--================Checkout Area =================-->
+<section class="checkout_area section_gap" style="padding-top: 12rem; padding-bottom: 4rem;">
+    <div class="container justify-content-center">
+        <div class="billing_details">
+            <form asp-action="MakePayment" class="row card-body contact_form mb-5">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="col-lg-8">
+                    <div class="card p-4">
+                        <center><h3>Payment details</h3></center>
+                        <br />
+                        @if (ViewBag.ErrorMessage != null)
+                        {
+                            <h4 class="text-danger">@ViewBag.ErrorMessage</h4>
+                        }
+
+                        <div class="form-group row justify-content-center">
+                            <label asp-for="Item3.CardNumber" class="col-sm-4 col-form-label font-weight-bold"></label>
+                            <input asp-for="Item3.CardNumber" class="form-control col-sm-6 text-dark" maxlength="10" />
+                            <span asp-validation-for="Item3.CardNumber" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group row justify-content-center">
+                            <label asp-for="Item3.CardHolderName" class="col-sm-4 col-form-label font-weight-bold"></label>
+                            <input asp-for="Item3.CardHolderName" class="form-control col-sm-6 text-dark" maxlength="50" />
+                            <span asp-validation-for="Item3.CardHolderName" class="text-danger"></span>
+                        </div>
+                            
+                        <div class="form-group row justify-content-center">
+                            <label asp-for="Item3.Ccv" class="col-sm-4 col-form-label font-weight-bold"></label>
+                            <input asp-for="Item3.Ccv" class="form-control col-sm-6 text-dark" maxlength="3" />
+                            <span asp-validation-for="Item3.Ccv" class="text-danger"></span>
+                        </div>
+                        <div class="form-group row justify-content-center">
+                            <label asp-for="Item3.ExpireDate" class="col-sm-4 col-form-label font-weight-bold"></label>
+                            <input asp-for="Item3.ExpireDate" class="form-control col-sm-6 text-dark" type="date" placeholder="YYYY-MM" maxlength="7" />
+                            <span asp-validation-for="Item3.ExpireDate" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="order_box">
+                            <h2>Your Order</h2>
+                            <ul class="list">
+                                <li><a href="#">Product <span>Total</span></a></li>
+                                <li><a href="#">@Model.Item2.Name <span class="middle">x @Model.Item1.Quantity</span> <span class="last">$@Model.Item1.TotalPrice</span></a></li>
+                            </ul>
+                            <ul class="list list_2">
+                                <li><a href="#">Total <span>$@Model.Item1.TotalPrice</span></a></li>
+                                <li><a href="#">Shipping <span>Free shipping</span></a></li>
+                            </ul>
+                            <button type="submit" class="primary-btn" >Pay</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+

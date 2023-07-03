@@ -1,0 +1,321 @@
+﻿@model Dictionary<string, int>
+@{
+    ViewData["Title"] = "Admin Home";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!-- Content Header (Page header) -->
+<div class="content-header" >
+    <div class="container-fluid">
+    <div class="row mb-2">
+        <div class="col-sm-6">
+        <h1 class="m-0">Dashboard</h1>
+        </div><!-- /.col -->
+        <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active">Dashboard v1</li>
+        </ol>
+        </div><!-- /.col --> 
+    </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+
+<!-- Main content -->
+<section class="content" id="reportToPDF">
+    <div class="container-fluid">
+    <!-- Small boxes (Stat box) -->
+    <div class="row">
+        <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-info">
+            <div class="inner">
+                <h3>@Model.GetValueOrDefault("orderCount")</h3>
+
+            <p>Number of Orders</p>
+            </div>
+        </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-success">
+            <div class="inner">
+                <h3>@Model.GetValueOrDefault("giftCount")</h3>
+
+            <p>Number of Gifts</p>
+            </div>
+        </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-warning">
+            <div class="inner">
+                <h3>@Model.GetValueOrDefault("userCount")</h3>
+
+            <p>Number of Users</p>
+            </div>
+        </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-danger">
+            <div class="inner">
+                <h3>@Model.GetValueOrDefault("categoryCount")</h3>
+
+            <p>Number of Categories</p>
+            </div>
+        </div>
+        </div>
+        <!-- ./col -->
+    </div>
+    <!-- /.row -->
+    <div class="row">
+        <div class="card card-primary col-md-12">
+                <div class="card-header">
+                    <h3 class="card-title">Profits chart</h3>
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="chart">
+                        <canvas id="profitsChart"></canvas>
+                    </div>
+                </div>
+                <!-- /.card-body -->
+            </div>
+    </div>
+    <!-- /.row (main row) -->
+    </div><!-- /.container-fluid -->
+</section>
+<form id="financialReportForm" class="form">
+    <div class="form-group">
+        <label for="periodType" class="form-label">Period Type:</label>
+        <select id="periodType" name="periodType" class="form-control" onchange="toggleMonthSelector(this.value)">
+            <option value="Month" selected>Month</option>
+            <option value="Year">Year</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="startYear" class="form-label">Start Year:</label>
+        <select id="startYear" name="startYear" class="form-control"></select>
+
+        <div id="month1Div">
+            <label for="startMonth" class="form-label">Start Month:</label>
+            <select id="startMonth" name="startMonth" class="form-control"></select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="endYear" class="form-label">End Year:</label>
+        <select id="endYear" name="endYear" class="form-control"></select>
+
+        <div id="month2Div">
+            <label for="endMonth" class="form-label">End Month:</label>
+            <select id="endMonth" name="endMonth" class="form-control"></select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="row">
+            <div class="col-6">
+                <center><button type="submit" class="btn btn-block btn-primary">Generate Report</button></center>
+            </div>
+            <div class="col-6">
+                <center><div id="downloadButton" class="btn btn-block btn-dark">Download as PDF</div></center>
+            </div>
+        </div>
+    </div>
+</form>
+    <!-- /.content -->
+<!-- jQuery -->
+<script src="~/AdminAssets/plugins/jquery/jquery.min.js"></script>
+
+<!-- Chart for initial page load -->
+<script type="text/javascript">
+    // Define a variable to hold the reference to the chart
+    var chart = null;
+
+    $(document).ready(function () {
+        console.log("in Jquery function");
+        $.ajax({
+            type: "GET",
+            url: "GetFinancialReport",
+            data: "",
+            contextType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: OnSuccessResult,
+            error: OnError
+        });
+
+        function OnSuccessResult(data) {
+            console.log(data);
+            var _data = data;
+            var _chartLabels= _data[0];
+            var _chartData= _data[1];
+
+            var colorPalette = [];
+
+            // Generate color for each dataset
+            for (var i = 0; i < _chartData.length; i++) {
+                var color = '#9AD0F5';
+                colorPalette.push(color);
+            }
+
+            // Check if the chart exists
+            if (chart) {
+                // Destroy the existing chart
+                chart.destroy();
+            }
+
+            chart = new Chart("profitsChart", {
+                type: "bar",
+                data: {
+                    labels: _chartLabels,
+                    datasets: [{
+                        label: 'Admin profits in $USD',
+                        data: _chartData,
+                        backgroundColor: colorPalette,
+                        borderWidth: 1
+                    }]
+                }
+            });
+
+        }
+
+        function OnError(err) {
+            // Handle the error response
+        }
+    });
+</script>
+
+<!-- Chart for specifying range and period type -->
+<script type="text/javascript">
+    
+    // Handle form submission
+    $('#financialReportForm').submit(function (event) {
+        event.preventDefault(); // Prevent default form submission
+
+        var period_type = $('#periodType').val(); 
+
+        var start_year = $('#startYear').val(); 
+        var start_month = $('#startMonth').val();
+
+        var end_year = $('#endYear').val();
+        var end_month = $('#endMonth').val();
+
+        $.ajax({
+            type: "POST",
+            url: "GetFinancialReport",
+            data: {
+                periodType: period_type,
+                startYear: start_year,
+                startMonth: start_month,
+                endYear: end_year,
+                endMonth: end_month,
+                },
+            dataType: "json",
+            success: OnSuccessResult,
+            error: OnError
+        });
+    });
+
+    function OnSuccessResult(data) {
+        console.log(data);
+        var _data = data;
+        var _chartLabels = _data[0];
+        var _chartData = _data[1];
+
+        var colorPalette = [];
+
+        // Generate color for each dataset
+        for (var i = 0; i < _chartData.length; i++) {
+            var color = '#9AD0F5';
+            colorPalette.push(color);
+        }
+
+        // Check if the chart exists
+        if (chart) {
+            // Destroy the existing chart
+            chart.destroy();
+        }
+
+        chart = new Chart("profitsChart", {
+            type: "bar",
+            data: {
+                labels: _chartLabels,
+                datasets: [{
+                    label: 'Admin profits in $USD',
+                    data: _chartData,
+                    backgroundColor: colorPalette,
+                    borderWidth: 1
+                }]
+            }
+        });
+    }
+
+    function OnError(err) {
+        console.error(err);
+    }
+</script>
+
+<!-- Generating form options -->
+<script type="text/javascript">
+    function generateYearOptions(startYear, endYear, selectId) {
+        var selectYear = document.getElementById(selectId);
+
+        for (var year = startYear; year <= endYear; year++) {
+            var option = document.createElement("option");
+            option.value = year;
+            option.text = year;
+            selectYear.appendChild(option);
+        }
+    }
+
+    // Function to generate month options
+    function generateMonthOptions(selectId) {
+        var selectMonth = document.getElementById(selectId);
+
+        for (var month = 1; month <= 12; month++) {
+            var option = document.createElement("option");
+            option.value = month;
+            option.text = month;
+            selectMonth.appendChild(option);
+        }
+    }
+
+    // Call the functions to generate options
+    generateYearOptions(2010, 2030, "startYear");
+    generateYearOptions(2010, 2030, "endYear");
+    generateMonthOptions("startMonth");
+    generateMonthOptions("endMonth");
+
+</script>
+
+<script>
+    function toggleMonthSelector(value) {
+        var MonthSelector1 = document.getElementById("month1Div");
+        var MonthSelector2 = document.getElementById("month2Div");
+        if(value == "Year")
+        {
+            MonthSelector1.style.display = 'none';
+            MonthSelector2.style.display = 'none';
+        }
+        else if (value == "Month"){
+            MonthSelector1.style.display = 'block';
+            MonthSelector2.style.display = 'block';
+        }
+            
+    }
+</script>
+
+
+
+

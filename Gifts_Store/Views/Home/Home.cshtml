@@ -1,0 +1,173 @@
+﻿@model Tuple<Home, AboutU, ContactU, IEnumerable<Testimonial>>
+
+@{
+	ViewData["Title"] = Model.Item1.SiteName;
+	var RoleId = Context.Session.GetInt32("RoleId");
+	if (RoleId == 2)
+		Layout = "~/Views/Shared/_MakerLayout.cshtml";
+	else if (RoleId == 3)
+		Layout = "~/Views/Shared/_SenderLayout.cshtml";
+	else if (RoleId == 4)
+		Layout = "~/Views/Shared/_GuestLayout.cshtml";
+}
+
+
+<!-- start banner Area -->
+<section class="banner-area" style="background-image: url('@Url.Content("~/images/" + Model.Item1.BackgroundPath)');">
+	<div class="container">
+		<div class="row fullscreen align-items-center justify-content-start">
+			<div class="col-lg-12">
+				<div class="row text-center">
+					<div class="banner-content">
+						<h1>
+							@Model.Item1.SiteName
+						</h1>
+						<h2>
+							@Model.Item1.WelcomeText
+						</h2>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- End banner Area -->
+<!-- start features Area -->
+<section class="features-area section_gap">
+	<div class="container">
+		<div class="row features-inner">
+			<!-- single features -->
+			<div class="col-lg-4 col-md-6 col-sm-6">
+				<div class="single-features">
+					<div class="f-icon">
+						<img src="~/HomeAssets/img/features/f-icon1.png" alt="">
+					</div>
+					<h6>Free Delivery</h6>
+					<p>Free Shipping on all order</p>
+				</div>
+			</div>
+			<!-- single features -->
+			<div class="col-lg-4 col-md-6 col-sm-6">
+				<div class="single-features">
+					<div class="f-icon">
+						<img src="~/HomeAssets/img/features/f-icon3.png" alt="">
+					</div>
+					<h6>24/7 Support</h6>
+					<p>Free Shipping on all order</p>
+				</div>
+			</div>
+			<!-- single features -->
+			<div class="col-lg-4 col-md-6 col-sm-6">
+				<div class="single-features">
+					<div class="f-icon">
+						<img src="~/HomeAssets/img/features/f-icon4.png" alt="">
+					</div>
+					<h6>Secure Payment</h6>
+					<p>Free Shipping on all order</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- end features Area -->
+
+<!-- start testimonial area -->
+<section>
+	<div class="container py-5">
+		<div class="row d-flex justify-content-center">
+			<div class="col-md-10 col-xl-8 text-center">
+				<h2 class="fw-bold mb-4">Testimonials</h2>
+			</div>
+		</div>
+		
+		<div class="row text-center">
+			<!--card-->
+			@foreach(var item in Model.Item4)
+			{
+				<div class="col-md-4 mb-4">
+					<div class="card">
+						<div class="card-body py-4 mt-2 shadow">
+							<h4 class="font-weight-bold">@item.User.Fname @item.User.Lname </h4>
+							<p class="mb-2">
+								<i class="fas fa-quote-left pe-2"></i>@item.Messege
+							</p>
+						</div>
+					</div>
+				</div>
+			}
+		</div>
+	</div>
+</section>
+<!-- end testimonial area -->
+
+<!-- start AboutUs Area -->
+<section class="banner-area mb-3">
+	<div class="container">
+		<div class="row fullscreen align-items-center justify-content-start">
+			<div class="col-lg-12">
+				<div class="row text-center">
+					<div class="banner-content">
+						<h2>
+							About Us
+						</h2>
+						<br />
+						<h3>
+							@Model.Item2.IntroText
+						</h3>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- End AboutUs Area -->
+
+<!--================Contact Area =================-->
+<section class="contact_area section_gap_bottom">
+	<div class="container">
+		<center><h2>Contact Us</h2></center>
+		<br />
+		<div class="row">
+			<div class="col-lg-3">
+				<div class="contact_info">
+					<div class="info_item mb-4">
+						<i class="lnr lnr-home"></i>
+						<h6>@Model.Item3.PoBox</h6>
+					</div>
+					<div class="info_item mb-4">
+						<i class="lnr lnr-phone-handset"></i>
+						<h6><a href="#">@Model.Item3.MobileNumber</a></h6>
+					</div>
+					<div class="info_item mb-4">
+						<i class="lnr lnr-envelope"></i>
+						<h6><a href="#">@Model.Item3.Email</a></h6>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-9">
+				<form asp-controller="Home" asp-action="AddContactUsEntry" class="row contact_form" method="post" id="contactForm">
+					<div class="col-md-6">
+						<div class="form-group">
+							<input type="text" class="form-control" id="name" name="name" placeholder="Enter your name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your name'" maxlength="50" required>
+						</div>
+						<div class="form-group">
+							<input type="email" class="form-control" id="email" name="email" placeholder="Enter email address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'" maxlength="50" required>
+						</div>
+						<div class="form-group">
+							<input type="text" class="form-control" id="subject" name="subject" placeholder="Enter Subject" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Subject'" maxlength="30" required>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<textarea class="form-control" name="message" id="message" rows="1" placeholder="Enter Message" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Message'" maxlength="500" required></textarea>
+						</div>
+					</div>
+					<div class="col-md-12 text-right">
+						<button type="submit" value="submit" class="primary-btn">Send Message</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</section>
+<!--================Contact Area =================-->
