@@ -205,8 +205,8 @@ namespace Gifts_Store.Controllers
             var query = from gm in _context.GiftMakers
                         join g in _context.Gifts on gm.Id equals g.GiftMakerId
                         join o in _context.Orderrs on g.Id equals o.GiftId
-                        where gm.Id == giftMakerId
-                        orderby o.OrderDate descending
+                        where gm.Id == giftMakerId && o.Status != "in cart"
+                        orderby o.Status descending, o.OrderDate descending
                         select Tuple.Create(o, g);
             var model = query.AsEnumerable();
 

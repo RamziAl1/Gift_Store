@@ -75,7 +75,7 @@ namespace Gifts_Store.Controllers
 			return View();
         }
 
-        public async Task<IActionResult> OrderRequest(decimal? id)
+        public async Task<IActionResult> AddToCart(decimal? id)
         {
             if (id == null || _context.Gifts == null)
             {
@@ -86,44 +86,98 @@ namespace Gifts_Store.Controllers
             {
                 return NotFound();
             }
-            HttpContext.Session.SetInt32("requestGiftId", (int)id);
+            HttpContext.Session.SetInt32("newGiftId", (int)id);
             Orderr? order = new Orderr();
             return View(Tuple.Create(order, gift));
         }
 
         [HttpPost]
-        public async Task<IActionResult> OrderRequest([Bind(Prefix ="Item1")] Orderr orderr)
+        public async Task<IActionResult> AddToCart([Bind(Prefix = "Item1")] Orderr orderr)
         {
-            var giftId = HttpContext.Session.GetInt32("requestGiftId");
-            if (giftId == null)
-                return NotFound("giftId is null");
-            HttpContext.Session.Remove("requestGiftId");
-            var gift = await _context.Gifts.Include(x => x.Category).SingleOrDefaultAsync(x => x.Id == giftId);
-            if (gift == null)
+			var giftId = HttpContext.Session.GetInt32("newGiftId");
+			if (giftId == null)
+				return NotFound("giftId is null");
+			HttpContext.Session.Remove("newGiftId");
+			var gift = await _context.Gifts.Include(x => x.Category).SingleOrDefaultAsync(x => x.Id == giftId);
+			if (gift == null)
+			{
+				return NotFound();
+			}
+
+			if (ModelState.IsValid)
+			{
+				orderr.TotalPrice = orderr.Quantity * (gift.Price * (1 - gift.Sale / 100));
+				orderr.GiftId = giftId;
+				orderr.GiftSenderId = HttpContext.Session.GetInt32("SenderId");
+				//orderr.OrderDate = DateTime.Now.Date;
+				//orderr.ExpectedArrivalDate = DateTime.Now.Date.AddDays(30);
+				orderr.Status = "in cart";
+				orderr.HasArrived = false;
+				orderr.PaymentMade = false;
+
+				_context.Add(orderr);
+				await _context.SaveChangesAsync();
+
+				TempData["OrderRequestStatus"] = "Order Successful";
+
+				return RedirectToAction(nameof(BrowseGifts));
+			}
+
+			return View(Tuple.Create(orderr, gift));
+		}
+
+        public IActionResult MyCart()
+        {
+            if (_context.Orderrs == null)
             {
-                return NotFound();
+                return View("_Orders_not_found");
             }
 
-            if (ModelState.IsValid)
+            var giftSenderId = HttpContext.Session.GetInt32("SenderId");
+            var query = from gs in _context.GiftSenders
+                        join o in _context.Orderrs on gs.Id equals o.GiftSenderId
+                        join g in _context.Gifts on o.GiftId equals g.Id
+                        join c in _context.Categories on g.CategoryId equals c.Id
+                        where gs.Id == giftSenderId && o.Status == "in cart"
+                        select Tuple.Create(o, g, c);
+
+            if (query == null)
             {
-                orderr.TotalPrice = orderr.Quantity * (gift.Price * ( 1 - gift.Sale/100));
-                orderr.GiftId = giftId;
-                orderr.GiftSenderId = HttpContext.Session.GetInt32("SenderId");
-                orderr.OrderDate = DateTime.Now.Date;
-                orderr.ExpectedArrivalDate = DateTime.Now.Date.AddDays(30);
-                orderr.Status = "pending";
-                orderr.HasArrived = false;
-                orderr.PaymentMade = false;
-
-                _context.Add(orderr);
-                await _context.SaveChangesAsync();
-
-                TempData["OrderRequestStatus"] = "Order Successful";
-
-                return RedirectToAction(nameof(BrowseGifts));
+                return View("_No_Orders_Found");
             }
 
-            return View(Tuple.Create(orderr, gift));
+            var ordersInCart = query.ToList();
+            return View(ordersInCart);
+        }
+
+        public async Task<IActionResult> Checkout()
+        {
+            if (_context.Orderrs == null)
+            {
+                return View("_Orders_not_found");
+            }
+
+            var giftSenderId = HttpContext.Session.GetInt32("SenderId");
+            var orders = await _context.Orderrs.Where(x => x.GiftSenderId == giftSenderId && x.Status == "in cart").ToListAsync();
+
+            if (orders == null)
+            {
+                return View("_No_orders_Found");
+            }
+
+            foreach(var order in orders)
+            {
+                order.OrderDate = DateTime.Now.Date;
+                order.ExpectedArrivalDate = DateTime.Now.Date.AddDays(30);
+                order.Status = "pending";
+
+                _context.Update(order);
+            }
+
+            TempData["CheckoutStatus"] = "Order Successful";
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(MyCart));
         }
 
         public IActionResult MyOrders()
@@ -133,8 +187,8 @@ namespace Gifts_Store.Controllers
                         join o in _context.Orderrs on gs.Id equals o.GiftSenderId
                         join g in _context.Gifts on o.GiftId equals g.Id
                         join c in _context.Categories on g.CategoryId equals c.Id
-                        where gs.Id == senderId
-                        orderby o.OrderDate descending
+                        where gs.Id == senderId && o.Status != "in cart"
+                        orderby o.HasArrived ascending, o.OrderDate descending
                         select Tuple.Create(o, g, c);
             var model = query.AsEnumerable();
             return View(model);
@@ -195,7 +249,10 @@ namespace Gifts_Store.Controllers
 
             _context.Remove(order);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(MyOrders));
+
+            if(TempData["removeItemFromCart"] != null)
+				return RedirectToAction(nameof(MyCart));
+			return RedirectToAction(nameof(MyOrders));
         }
 
         public async Task<IActionResult> MakePayment(decimal? id)

@@ -19,7 +19,7 @@
 {
 	<section class="order_details section_gap">
 		<div class="container">
-			<h3 class="title_confirmation">Thank you. Your order request has been received.</h3>
+			<h3 class="title_confirmation">Thank you. Your Item has been added to the cart.</h3>
 		</div>
 	</section>
 }
@@ -84,10 +84,10 @@
 										<h6>Category: @item.Category?.CategoryName</h6>
 									</div>
 									<div class="prd-bottom">
-										<a asp-action="OrderRequest" asp-route-id="@item.Id" class="social-info">
+										<a asp-action="AddToCart" asp-route-id="@item.Id" class="social-info">
 											<div style="border: none; background-color:transparent">
-												<span class="ti-bag"></span>
-												<p class="hover-text">Order</p>
+												<span class="ti-shopping-cart"></span>
+												<p class="hover-text">Add</p>
 											</div>
 										</a>
 									</div>

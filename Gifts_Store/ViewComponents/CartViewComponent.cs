@@ -28,7 +28,7 @@ namespace Gifts_Store.ViewComponents
 
             if (query == null)
             {
-                return View("_No_Pending_Users_Found");
+                return View("_No_Orders_Found");
             }
 
             var ordersInCart = query.ToList();

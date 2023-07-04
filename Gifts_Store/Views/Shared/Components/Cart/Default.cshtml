@@ -6,12 +6,12 @@
         @{
             if (Model != null && Model.Count != 0)
             {
-                <i class="ti-shopping-cart-full"></i>
+                <i class="ti-shopping-cart-full" style="font-size: 24px;"></i>
                 <span class="badge badge-warning navbar-badge">@Model.Count</span>
             }
             else
             {
-                <i class="ti-shopping-cart"></i>
+                <i class="ti-shopping-cart" style="font-size: 24px;"></i>
             }
         }
     </a>
@@ -25,14 +25,14 @@
                     <div class="dropdown-item text-wrap">
                         <i class="ti-gift mr-2"></i> @item.First
                     </div>
-                    //<a asp-controller="@item.Second[0]" asp-action="@item.Second[1]" class="dropdown-item text-wrap">
-                    //    <i class="ti-gift mr-2"></i> @item.First
-                    //</a>
                 }
         }
         <div class="dropdown-divider"></div>
-        <a asp-controller="GiftSender" asp-action="MyCart" class="dropdown-item genric-btn primary radius">
-            Proceed to checkout
-        </a>
+        <div class="p-2">
+            <a asp-controller="GiftSender" asp-action="MyCart" class="dropdown-item genric-btn primary radius">
+                My Cart
+            </a>
+        </div>
+        
     </div>
 </li>

@@ -1,6 +1,6 @@
 ﻿@model Tuple<Orderr, Gift>
 @{
-    ViewData["Title"] = "Order Request";
+    ViewData["Title"] = "Add to cart";
     Layout = "~/Views/Shared/_SenderLayout.cshtml";
 }
 
@@ -9,7 +9,7 @@
     <div class="container">
         <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
             <div class="col-first">
-                <h1>Order request</h1>
+                <h1>Add to cart</h1>
             </div>
         </div>
     </div>
@@ -22,10 +22,10 @@
             <div class="row">
                 <div class="col-lg-8">
                     <div class="card">
-                        <form asp-action="OrderRequest" class="card-body contact_form mb-5">
+                        <form asp-action="AddToCart" class="card-body contact_form mb-5">
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-                            <center><h3>Order Request details</h3></center>
+                            <center><h3>Add to cart details</h3></center>
                             <br />
 
                             <div class="form-group row justify-content-center">

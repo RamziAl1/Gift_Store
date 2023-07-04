@@ -1,0 +1,98 @@
+﻿@model List<Tuple<Orderr, Gift, Category>>
+@{
+    ViewData["Title"] = "My Cart";
+    Layout = "~/Views/Shared/_SenderLayout.cshtml";
+}
+
+<!-- Start Banner Area -->
+<section class="banner-area organic-breadcrumb">
+	<div class="container">
+		<div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+			<div class="col-first">
+				<h1>My Cart</h1>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- End Banner Area -->
+<!-- start product Area -->
+<section class="product-area section_gap" style="padding-bottom: 4rem;">
+	<!-- single product slide -->
+	<div class="single-product-slider">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-lg-6 text-center">
+					<div class="section-title">
+						@if (TempData["CheckoutStatus"] != null)
+						{
+							<center><h4 class="text-success">Checkout successful</h4></center>
+						}
+						<div class="m-5">
+							<a asp-action="Checkout" class="primary-btn">Checkout</a>
+						</div>
+						@if(Model.Count != 0){
+							<h4>Total price of cart items: $@Model.Sum(item => item.Item1.TotalPrice)</h4>
+						}
+						
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				@{
+					if(Model.Count == 0)
+					{
+						<div class="col-lg-12">
+							<center>
+								<h4>No Items in cart</h4>
+							</center>
+						</div>
+					}
+					else foreach (var item in Model)
+					{
+						<!-- single product -->
+						<div class="col-lg-3 col-md-6">
+							<div class="single-product">
+								<img class="img" src="@Url.Content("~/images/" + item.Item2.ImagePath)" width="200" height="140" alt="gift image">
+								<div class="product-details">
+									<h6>
+										@item.Item2.Name
+									</h6>
+									<div class="price">
+										@if (item.Item2.Sale != 0)
+										{
+											var priceOnSale = Math.Round((double)item.Item2.Price * (1.0 - (double)item.Item2.Sale / 100), 2);
+											<h6>$@Html.Raw(priceOnSale.ToString())</h6>
+											<h6 class="l-through">$@Html.Raw(((double)item.Item2.Price).ToString())</h6>
+										}
+										else
+										{
+											<h6>$@Html.Raw(((double)item.Item2.Price).ToString())</h6>
+										}
+										<hr />
+										<h6>Category: @item.Item3.CategoryName</h6>
+										<hr />
+										<h6>Address: @item.Item1.Address</h6><br />
+										<h6>Order Quantity: @item.Item1.Quantity</h6><br />
+										<h6>Total price: @item.Item1.TotalPrice</h6>
+									</div>
+								</div>
+							</div>
+							<div class="row justify-content-center py-5">
+								<div class="col-sm-6 justify-content-center parent-element">
+										<form method="get" asp-controller="GiftSender" asp-action="CancelOrder">
+										@{
+											TempData["removeItemFromCart"] = "remove";
+										}
+										<input type="hidden" name="id" asp-for="@item.Item1.Id" />
+										<button type="submit" class="primary-btn child-element w-100 d-block" style="border:none;">Remove</button>
+									</form>
+								</div>
+							</div>
+						</div>
+					}
+				}
+			</div>
+		</div>
+	</div>
+</section>
+<!-- end product Area -->
