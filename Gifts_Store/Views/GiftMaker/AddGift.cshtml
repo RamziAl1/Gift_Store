@@ -37,10 +37,10 @@
                 <input asp-for="ImageFile" class="form-control" />
                 <span asp-validation-for="ImageFile" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Add" class="primary-btn" style="border: none;" />
+            <div class="form-group d-flex justify-content-center align-items-center">
+                <input type="submit" value="Add" class="genric-btn primary circle" style="border: none; margin-right: 10px;" />
+                <a asp-action="MyProducts" class="genric-btn primary circle">Back to List</a>
             </div>
-            <a asp-action="MyProducts" class="primary-btn">Back to List</a>
         </form>
     </div>
 </div>

@@ -6,11 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
-using NuGet.Protocol.Plugins;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
-using System.Web.Helpers;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+
 
 namespace Gifts_Store.Controllers
 {
@@ -28,6 +26,7 @@ namespace Gifts_Store.Controllers
 		public IActionResult BrowseGifts()
         {
 			var gifts = _context.Gifts
+                .Include(x => x.Category)
 				.AsEnumerable();
 
 			ViewData["Categories"] = new SelectList(_context.Categories, "Id", "CategoryName");
@@ -35,28 +34,30 @@ namespace Gifts_Store.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> BrowseGifts(string giftName, string giftCategory)
+        public IActionResult BrowseGifts(string giftName, string giftCategory)
         {
-            await Console.Out.WriteLineAsync("----- giftName=" + giftName + "  ---  giftCategory=" + giftCategory + "  --------");
 			ViewData["Categories"] = new SelectList(_context.Categories, "Id", "CategoryName");
 
 			if ((giftName == null || giftName == "") && giftCategory == "All")
             {
 				var gifts = _context.Gifts
-				    .AsEnumerable();
+					.Include(x => x.Category)
+					.AsEnumerable();
                 return View(gifts);
 			}
             else if((giftName == null || giftName == "") && giftCategory != "All")
             {
                 var categoryId = Int32.Parse(giftCategory);
 				var gifts = _context.Gifts
-                    .Where(x => x.CategoryId == categoryId)
+					.Include(x => x.Category)
+					.Where(x => x.CategoryId == categoryId)
 				    .AsEnumerable();
 				return View(gifts);
 			}
 			else if ((giftName != null && giftName != "") && giftCategory == "All")
 			{
 				var gifts = _context.Gifts
+					.Include(x => x.Category)
 					.Where(x => x.Name.ToLower().Contains(giftName.ToLower()))
 					.AsEnumerable();
 				return View(gifts);
@@ -65,6 +66,7 @@ namespace Gifts_Store.Controllers
 			{
 				var categoryId = Int32.Parse(giftCategory);
 				var gifts = _context.Gifts
+					.Include(x => x.Category)
 					.Where(x => x.Name.ToLower().Contains(giftName.ToLower()) && x.CategoryId == categoryId)
 					.AsEnumerable();
 				return View(gifts);
@@ -79,7 +81,7 @@ namespace Gifts_Store.Controllers
             {
                 return NotFound();
             }
-            var gift = await _context.Gifts.SingleOrDefaultAsync(x => x.Id == id);
+            var gift = await _context.Gifts.Include(x => x.Category).SingleOrDefaultAsync(x => x.Id == id);
             if (gift == null)
             {
                 return NotFound();
@@ -96,7 +98,7 @@ namespace Gifts_Store.Controllers
             if (giftId == null)
                 return NotFound("giftId is null");
             HttpContext.Session.Remove("requestGiftId");
-            var gift = await _context.Gifts.SingleOrDefaultAsync(x => x.Id == giftId);
+            var gift = await _context.Gifts.Include(x => x.Category).SingleOrDefaultAsync(x => x.Id == giftId);
             if (gift == null)
             {
                 return NotFound();
@@ -126,16 +128,74 @@ namespace Gifts_Store.Controllers
 
         public IActionResult MyOrders()
         {
-            
             var senderId = HttpContext.Session.GetInt32("SenderId");
             var query = from gs in _context.GiftSenders
                         join o in _context.Orderrs on gs.Id equals o.GiftSenderId
                         join g in _context.Gifts on o.GiftId equals g.Id
+                        join c in _context.Categories on g.CategoryId equals c.Id
                         where gs.Id == senderId
-                        orderby o.Status ascending
-                        select Tuple.Create(o, g);
+                        orderby o.OrderDate descending
+                        select Tuple.Create(o, g, c);
             var model = query.AsEnumerable();
             return View(model);
+        }
+
+        public async Task<IActionResult> CancelOrder(decimal? id)
+        {
+            if (id == null)
+                return NotFound("passed orderId is null in controller action");
+
+            var order = await _context.Orderrs.SingleOrDefaultAsync(x => x.Id == id);
+
+            if(order == null)
+            {
+                return NotFound("Order with passed Id not found");
+            }
+
+            if (order.HasArrived != null && (bool)order.HasArrived)
+            {
+                TempData["CancelOrderMessage"] = "Order has already been delivered, can't cancel";
+                return RedirectToAction(nameof(MyOrders));
+            }
+
+            if (order.Status != null && order.Status == "approved")
+            {
+                var gift = await _context.Gifts.SingleOrDefaultAsync(x => x.Id == order.GiftId);
+                if (gift == null)
+                {
+                    return NotFound("Gift related to order not found");
+                }
+                gift.Quantity += order.Quantity;
+                TempData["CancelOrderMessage"] = "Approved order has been canceled successfully";
+
+                if (order.PaymentMade != null && (bool)order.PaymentMade)
+                {
+                    var adminn = await _context.Adminns.SingleOrDefaultAsync(x => x.Id == 1);
+                    var giftMaker = await _context.GiftMakers.SingleOrDefaultAsync(x => x.Id == gift.GiftMakerId);
+                    var visaInfoDB = await _context.VisaInfos.SingleOrDefaultAsync(x => x.Id == order.VisaInfoId);
+
+                    if (adminn == null)
+                        return NotFound("Adminn not found");
+                    if (giftMaker == null)
+                        return NotFound("giftMaker not found");
+                    if (visaInfoDB == null)
+                        return NotFound("visaInfoDB not found");
+
+                    await Console.Out.WriteLineAsync();
+
+                    visaInfoDB.Balance += order.TotalPrice;
+                    adminn.Profit -= ProfitDistribution.AdminPercentage * order.TotalPrice;
+                    giftMaker.Profit -= ProfitDistribution.GiftMakerPercentage * order.TotalPrice;
+
+                    TempData["CancelOrderMessage"] = "Approved order has been canceled successfully, The amount payed was refunded successfully";
+                }
+            }
+            else
+                TempData["CancelOrderMessage"] = "Unapproved order canceled successfully";
+
+            _context.Remove(order);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(MyOrders));
         }
 
         public async Task<IActionResult> MakePayment(decimal? id)
@@ -157,19 +217,6 @@ namespace Gifts_Store.Controllers
         [HttpPost]
         public async Task<IActionResult> MakePayment([Bind(Prefix = "Item3")] VisaInfo visaInfo)
         {
-            foreach (var key in ModelState.Keys)
-            {
-                if (ModelState.TryGetValue(key, out var entry) && entry.Errors.Count > 0)
-                {
-                    foreach (var error in entry.Errors)
-                    {
-                        var errorMessage = error.ErrorMessage;
-                        var attributeName = key;
-
-                        Console.WriteLine($"Error: {errorMessage} (Attribute: {attributeName})");
-                    }
-                }
-            }
             var orderId = HttpContext.Session.GetInt32("PaymentOrderId");
             var query = from gs in _context.GiftSenders
                         join o in _context.Orderrs on gs.Id equals o.GiftSenderId
@@ -211,6 +258,12 @@ namespace Gifts_Store.Controllers
                 var adminn = await _context.Adminns.SingleOrDefaultAsync(x => x.Id == 1);
                 var giftMaker = await _context.GiftMakers.SingleOrDefaultAsync(x => x.Id == model.Item2.GiftMakerId);
 
+                if (adminn == null)
+                    return NotFound("Adminn not found");
+                if (giftMaker == null)
+                    return NotFound("giftMaker not found");
+
+                model.Item1.VisaInfoId = visaInfoDB.Id;
                 visaInfoDB.Balance = visaInfoDB.Balance - model.Item1.TotalPrice;
                 adminn.Profit = adminn.Profit + ProfitDistribution.AdminPercentage * model.Item1.TotalPrice;
                 giftMaker.Profit = giftMaker.Profit + ProfitDistribution.GiftMakerPercentage * model.Item1.TotalPrice;
@@ -228,24 +281,28 @@ namespace Gifts_Store.Controllers
                 var userr = await _context.Userrs.SingleOrDefaultAsync(x => x.Id == userId);
                 var userLogin = await _context.UserLogins.SingleOrDefaultAsync(x => x.UserId == userId);
 
-                string recipientName = $"{userr?.Fname} {userr?.Lname}";
-                string senderName = "Gift Store";
+                Task.Run(() =>
+                {
+                    string recipientName = $"{userr?.Fname} {userr?.Lname}";
+                    string senderName = "Gift Store";
 
-                string emailSubject = EmailTemplate.InvoiceBody.GetSubject();
-                string emailBody = EmailTemplate.InvoiceBody.GetBody(recipientName, senderName);
+                    string emailSubject = EmailTemplate.InvoiceBody.GetSubject();
+                    string emailBody = EmailTemplate.InvoiceBody.GetBody(recipientName, senderName);
 
-                string orderDate = model.Item1.OrderDate.Date.ToString("yyyy-MM-dd");
-                string paymentDate = DateTime.Now.Date.ToString("yyyy-MM-dd");
-                string giftName = model.Item2.Name;
-                string orderQuantity = model.Item1.Quantity.ToString();
-                string? paymentAmount = model.Item1.TotalPrice.ToString();
+                    string orderDate = model.Item1.OrderDate.Date.ToString("yyyy-MM-dd");
+                    string paymentDate = DateTime.Now.Date.ToString("yyyy-MM-dd");
+                    string giftName = model.Item2.Name;
+                    string orderQuantity = model.Item1.Quantity.ToString();
+                    string? paymentAmount = model.Item1.TotalPrice.ToString();
 
-                string pdfFileName = EmailTemplate.InvoicePDFTemplate.GetSubject();
-                string pdfBody = EmailTemplate.InvoicePDFTemplate.GetBody(orderDate, paymentDate, recipientName, giftName, orderQuantity, paymentAmount);
-                
-                string? toEmail = userLogin?.Email;
+                    string pdfFileName = EmailTemplate.InvoicePDFTemplate.GetSubject();
+                    string pdfBody = EmailTemplate.InvoicePDFTemplate.GetBody(orderDate, paymentDate, recipientName, giftName, orderQuantity, paymentAmount);
 
-                EmailService.SendEmailFromGiftShop(emailBody, emailSubject, toEmail, pdfBody, pdfFileName);
+                    string? toEmail = userLogin?.Email;
+
+                    EmailService.SendEmailFromGiftShop(emailBody, emailSubject, toEmail, pdfBody, pdfFileName);
+                });
+
                 HttpContext.Session.Remove("PaymentOrderId");
                 return RedirectToAction("MyOrders", "GiftSender");
             }
@@ -273,7 +330,6 @@ namespace Gifts_Store.Controllers
 		}
 
 		[HttpPost]
-		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> Mytestimonial([Bind("Id,Messege")] Testimonial testimonial)
 		{
 
@@ -293,7 +349,7 @@ namespace Gifts_Store.Controllers
         {
             if (HttpContext != null && HttpContext.Session != null)
             {
-                int userLoginId = (int)HttpContext?.Session?.GetInt32("userLoginId");
+                int? userLoginId = HttpContext?.Session?.GetInt32("userLoginId");
                 var model = _context.UserLogins
                     .Include(x => x.User)
                     .Include(x => x.Role)
@@ -416,7 +472,7 @@ namespace Gifts_Store.Controllers
 
             if (ModelState.IsValid)
             {
-                string username = HttpContext.Session.GetString("Username");
+                string? username = HttpContext.Session.GetString("Username");
                 var userLogin = _context.UserLogins.Where(x => x.UserName == username && x.Password == oldPassword).SingleOrDefault();
                 if (userLogin != null)
                 {

@@ -2,14 +2,12 @@
 using Gifts_Store.Enums;
 using Gifts_Store.Models;
 using Gifts_Store.Services;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Globalization;
-using System.Reflection.Metadata.Ecma335;
 using System.Text;
 
 namespace Gifts_Store.Controllers
@@ -27,11 +25,15 @@ namespace Gifts_Store.Controllers
 
 		public IActionResult DashBoard()
         {
-            Dictionary<string, int> statistics = new Dictionary<string, int>();
-            statistics.Add("orderCount", _context.Orderrs.Count());
-            statistics.Add("giftCount", _context.Gifts.Count());
-            statistics.Add("userCount", _context.Userrs.Count());
-            statistics.Add("categoryCount", _context.Categories.Count());
+            var orders = _context.Orderrs.ToList();
+            Dictionary<string, int> statistics = new Dictionary<string, int>
+            {
+                { "approvedOrderCount", orders.Where(x => x.Status == "approved").Count() },
+                { "totalOrderCount", orders.Where(x => x.Status != "in cart").Count() },
+                { "giftCount", _context.Gifts.Count() },
+                { "userCount", _context.Userrs.Count() },
+                { "categoryCount", _context.Categories.Count() }
+            };
 
             return View(statistics);
         }
@@ -39,7 +41,6 @@ namespace Gifts_Store.Controllers
         [HttpGet]
         public List<object> GetFinancialReport()
         {
-            Console.WriteLine("------------------------------- in GetFinancialReport Get");
             List<object> data = new List<object>();
             DateTime startDate = new DateTime(DateTime.Now.Year, 1, 1);
             DateTime endDate = new DateTime(DateTime.Now.Year + 1, 1, 1);
@@ -52,15 +53,6 @@ namespace Gifts_Store.Controllers
 
             var labelsAndProfits = GetMonthlyProfitsInInterval(payedOrders, startDate, endDate);
 
-            Console.WriteLine("Labels count=" + labelsAndProfits.Item1.Count);
-            foreach (var x in labelsAndProfits.Item1)
-                Console.Write(x + " ");
-            Console.WriteLine();
-            Console.WriteLine("profits count=" + labelsAndProfits.Item2.Count);
-            foreach (var x in labelsAndProfits.Item2)
-                Console.Write(x + " ");
-            Console.WriteLine();
-
             data.Add(labelsAndProfits.Item1);
             data.Add(labelsAndProfits.Item2);
 
@@ -70,18 +62,9 @@ namespace Gifts_Store.Controllers
         [HttpPost]
         public List<object>? GetFinancialReport(string periodType, string startYear, string startMonth, string endYear, string endMonth)
         {
-            Console.WriteLine("------------------------------- in GetFinancialReport Post");
-            Console.WriteLine("periodtype= " + periodType);
-            Console.WriteLine("startYear= " + startYear);
-            Console.WriteLine("startMonth= " + startMonth);
-            Console.WriteLine("endYear= " + endYear);
-            Console.WriteLine("endMonth= " + endMonth);
-
             List<object> data = new List<object>();
             DateTime startDate = new DateTime(Int32.Parse(startYear), Int32.Parse(startMonth), 1);
             DateTime endDate = new DateTime(Int32.Parse(endYear), Int32.Parse(endMonth), 1);
-
-            Console.WriteLine("start and enddates=" + startDate + "  ----  " + endDate);
 
             var payedOrders = _context.Orderrs
                 .Where(x => x.PaymentMade == true).ToList();
@@ -102,15 +85,6 @@ namespace Gifts_Store.Controllers
                 return null;
             }
 
-            Console.WriteLine("Labels count=" + labelsAndProfits.Item1.Count);
-            foreach (var x in labelsAndProfits.Item1)
-                Console.Write(x + " ");
-            Console.WriteLine();
-            Console.WriteLine("profits count=" + labelsAndProfits.Item2.Count);
-            foreach (var x in labelsAndProfits.Item2)
-                Console.Write(x + " ");
-            Console.WriteLine();
-
             data.Add(labelsAndProfits.Item1);
             data.Add(labelsAndProfits.Item2);
 
@@ -119,82 +93,87 @@ namespace Gifts_Store.Controllers
 
         public IActionResult GiftsWithCategories()
         {
-            var query = from c in _context.Categories
+            var giftsWithCategories = (from c in _context.Categories
                         join g in _context.Gifts on c.Id equals g.CategoryId
                         join gm in _context.GiftMakers on g.GiftMakerId equals gm.Id
                         join u in _context.Userrs on gm.UserId equals u.Id
                         join ul in _context.UserLogins on u.Id equals ul.UserId
-                        select Tuple.Create(g, ul.UserName, c.CategoryName);
-
-            var giftsWithCategories = query.AsEnumerable();
+                        select Tuple.Create(g, ul.UserName, c.CategoryName))
+                        .AsEnumerable();
 
             return View(giftsWithCategories);
         }
 
         public IActionResult PendingGiftMakers()
         {
-            var query = from u in _context.Userrs
+            var pendingGiftMakers = (from u in _context.Userrs
                         join gm in _context.GiftMakers on u.Id equals gm.UserId
                         join c in _context.Categories on gm.CategoryId equals c.Id
                         where u.Status == "pending"
-                        select Tuple.Create(u, c);
-
-            var pendingGiftMakers = query.AsEnumerable().ToList();
+                        select Tuple.Create(u, c))
+                        .AsEnumerable();
 
             return View(pendingGiftMakers);
         }
 
-        // POST: Admin/RejectMaker/5
-        [HttpPost, ActionName("RejectMaker")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> RejectMaker(decimal id)
+        [HttpPost]
+        public async Task<IActionResult> RejectMaker(decimal? id)
         {
             if (_context.Userrs == null)
             {
-                return Problem("Entity set 'ModelContext.Userrs' is null.");
+                return NotFound("Entity set 'ModelContext.Userrs' is null.");
             }
             var userr = await _context.Userrs.FindAsync(id);
-            if (userr != null)
-            {
-                if (userr.ImagePath != null)
-                {
-                    string wwwRootPath = _environment.WebRootPath;
-                    // define path of file to delete
-                    string path = Path.Combine(wwwRootPath + "/images/", userr.ImagePath);
-                    // delete the file
-                    try
-                    {
-                        // Check if the file exists before deleting
-                        if (System.IO.File.Exists(path))
-                            System.IO.File.Delete(path);
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine($"An error occurred while deleting the file: {ex.Message}");
-                    }
-                }
 
-                _context.Userrs.Remove(userr);
+            if (userr == null)
+            {
+                return NotFound("User with that id not found");
             }
 
-            var userLogin = _context.UserLogins.Where(x => x.UserId == userr.Id).SingleOrDefault();
+            if (userr.ImagePath != null)
+            {
+                string wwwRootPath = _environment.WebRootPath;
+                // define path of file to delete
+                string path = Path.Combine(wwwRootPath + "/images/", userr.ImagePath);
+                // delete the file
+                try
+                {
+                    // Check if the file exists before deleting
+                    if (System.IO.File.Exists(path))
+                        System.IO.File.Delete(path);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"An error occurred while deleting the file: {ex.Message}");
+                }
+            }
 
-            string email = userLogin != null ? userLogin.Email : "email not found";
-            string recipientName = $"{userr?.Fname} {userr?.Lname}";
-            string senderName = "Gift Store";
+            _context.Userrs.Remove(userr);
 
-            string emailSubject = EmailTemplate.MembershipRejection.GetSubject();
-            string emailBody = EmailTemplate.MembershipRejection.GetBody(recipientName, senderName);
+			var userLogin = await _context.UserLogins.SingleOrDefaultAsync(x => x.UserId == userr.Id);
 
-            EmailService.SendEmailFromGiftShop(emailBody, emailSubject, email);
+			if (userLogin == null)
+			{
+				throw new Exception("UserLogin with that id not found");
+			}
+
+			Task.Run(() =>
+            {
+                string email = userLogin.Email;
+                string recipientName = $"{userr?.Fname} {userr?.Lname}";
+                string senderName = "Gift Store";
+
+                string emailSubject = EmailTemplate.MembershipRejection.GetSubject();
+                string emailBody = EmailTemplate.MembershipRejection.GetBody(recipientName, senderName);
+
+                EmailService.SendEmailFromGiftShop(emailBody, emailSubject, email);
+            });
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(PendingGiftMakers));
         }
 
-        // POST: Admin/ApproveMaker/5
-        [HttpPost, ActionName("ApproveMaker")]
-        [ValidateAntiForgeryToken]
+        [HttpPost]
         public async Task<IActionResult> ApproveMaker(decimal id)
         {
             if (_context.Userrs == null)
@@ -202,36 +181,47 @@ namespace Gifts_Store.Controllers
                 return Problem("Entity set 'ModelContext.Userrs' is null.");
             }
             var userr = await _context.Userrs.FindAsync(id);
-            if (userr != null)
+
+            if (userr == null)
             {
-                try
+                return NotFound("User with that id not found");
+            }
+
+            try
+            {
+                userr.Status = "approved";
+                _context.Update(userr);
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!UserrExists(userr.Id))
                 {
-                    userr.Status = "approved";
-                    _context.Update(userr);
+                    return NotFound();
                 }
-                catch (DbUpdateConcurrencyException)
+                else
                 {
-                    if (!UserrExists(userr.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    throw;
                 }
             }
-            var userLogin = _context.UserLogins.Where(x => x.UserId == userr.Id).SingleOrDefault();
 
-            string recipientName = $"{userr?.Fname} {userr?.Lname}";
-            string username = userLogin != null ? userLogin.UserName : "username not found";
-            string email = userLogin != null ? userLogin.Email : "email not found";
-            string senderName = "Gift Store";
+			var userLogin = await _context.UserLogins.SingleOrDefaultAsync(x => x.UserId == userr.Id);
+			if (userLogin == null)
+			{
+				throw new Exception("UserLogin with that id not found");
+			}
 
-            string emailSubject = EmailTemplate.MembershipApproval.GetSubject();
-            string emailBody = EmailTemplate.MembershipApproval.GetBody(recipientName, username, email, senderName);
+			Task.Run(() =>
+            {
+                string recipientName = $"{userr.Fname} {userr.Lname}";
+                string username = userLogin.UserName;
+                string email = userLogin.Email;
+                string senderName = "Gift Store";
 
-            EmailService.SendEmailFromGiftShop(emailBody, emailSubject, email);
+                string emailSubject = EmailTemplate.MembershipApproval.GetSubject();
+                string emailBody = EmailTemplate.MembershipApproval.GetBody(recipientName, username, email, senderName);
+
+                EmailService.SendEmailFromGiftShop(emailBody, emailSubject, email);
+            });
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(PendingGiftMakers));
@@ -355,14 +345,12 @@ namespace Gifts_Store.Controllers
                 .SelectMany(v => v.Errors)
                 .Select(e => e.ErrorMessage)
                 .ToList();
-            await Console.Out.WriteLineAsync("error messages(" + errorMessages.Count + ")=");
 
             HttpContext.Session.Set("ErrorMessages", Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(errorMessages)));
 
-
             if (ModelState.IsValid)
             {
-                string username = HttpContext.Session.GetString("Username");
+                string? username = HttpContext.Session.GetString("Username");
                 var userLogin = _context.UserLogins.Where(x => x.UserName == username && x.Password == oldPassword).SingleOrDefault();
                 if (userLogin != null)
                 {

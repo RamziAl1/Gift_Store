@@ -4,7 +4,19 @@
     Layout = "~/Views/Shared/_MakerLayout.cshtml";
 }
 
-<section class="checkout_area section_gap" style="padding-top: 12rem; padding-bottom: 4rem;">
+<!-- Start Banner Area -->
+<section class="banner-area organic-breadcrumb">
+    <div class="container">
+        <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+            <div class="col-first">
+                <h1>My Orders</h1>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Banner Area -->
+
+<section class="checkout_area section_gap" style="/*padding-top: 12rem;*/ padding-bottom: 4rem;">
     <div class="container justify-content-center">
         <center><h2>My orders</h2></center>
         <div class="billing_details">
@@ -15,6 +27,14 @@
                         <div class="card">
                             <div class="card-body contact_form mb-5">
                                 <center><h3>Order details</h3></center>
+                                @if (TempData["QuantityNotEnoughmessage" + item.Item1.Id] != null)
+                                {
+                                    <center>
+                                        <h4>
+                                            @TempData["QuantityNotEnoughmessage" + item.Item1.Id]
+                                        </h4>
+                                    </center>
+                                }
                                 <br />
                                 <div class="form-group row justify-content-center">
                                     <label class="col-sm-4 col-form-label font-weight-bold">Order date</label>
@@ -131,29 +151,30 @@
                             <div class="row justify-content-center py-5">
                                 @if(item.Item1.Status == "pending")
                                 {
-                                    <div class="col-sm-2 justify-content-center mx-5">
+                                    <div class="col-sm-2 d-flex justify-content-center mx-5">
                                         <form method="post" asp-controller="GiftMaker" asp-action="ApproveGiftRequest" class="justify-content-center">
                                             <input type="hidden" name="id" asp-for="@item.Item1.Id" />
-                                            <button type="submit" class="btn btn-success">Approve</button>
+                                            <button type="submit" class="primary-btn" style="border: none;">Approve</button>
                                         </form>
                                     </div>
-                                    <div class="col-sm-2 justify-content-center mx-5">
+                                    <div class="col-sm-2 d-flex justify-content-center mx-5">
                                         <form method="post" asp-controller="GiftMaker" asp-action="RejectGiftRequest" class="justify-content-center">
                                             <input type="hidden" name="id" asp-for="@item.Item1.Id" />
-                                            <button type="submit" class="btn btn-danger">Reject</button>
+                                            <button type="submit" class="primary-btn" style="border: none;">Reject</button>
                                         </form>
                                     </div>
+
                                 }
                                 else if (item.Item1.PaymentMade == true && item.Item1.HasArrived == false)
                                 {
-                                    <div class="col-sm-2 justify-content-center">
+                                    <div class="col-sm-2 d-flex justify-content-center">
                                         <form method="post" asp-controller="GiftMaker" asp-action="SetOrderArrived" class="justify-content-center">
                                             <input type="hidden" name="id" asp-for="@item.Item1.Id" />
-                                            <button type="submit" class="btn btn-primary">Set arrived</button>
+                                            <button type="submit" class="primary-btn" style="border: none;">Set arrived</button>
                                         </form>
                                     </div>
                                 }
-                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

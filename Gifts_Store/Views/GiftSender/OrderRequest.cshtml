@@ -60,7 +60,7 @@
 
                             <div class="form-group row justify-content-center" >
                                 <div class="offset-sm-4 col-sm-6">
-                                    <button type="submit" class="primary-btn" style="border:none">Save</button>
+                                    <button type="submit" class="genric-btn primary circle" style="border:none">Order</button>
                                 </div>
                             </div>
                         </form>
@@ -87,6 +87,8 @@
                                     }
                                     <hr />
                                     <h6>Available Quantity: @Model.Item2.Quantity</h6>
+                                    <hr />
+                                    <h6>Category: @Model.Item2.Category?.CategoryName</h6>
                                 </div>
                             </div>
                         </div>

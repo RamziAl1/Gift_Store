@@ -44,10 +44,11 @@
             <div class="form-group">
                 <img src="@Url.Content("~/images/" +  Model.ImagePath)" width="100" height="100" alt="gift image" />
             </div>
-            <div class="form-group">
-                <input type="submit" value="Edit" class="primary-btn" style="border: none;" />
+            <div class="form-group d-flex justify-content-center align-items-center">
+                <input type="submit" value="Edit" class="genric-btn primary circle" style="border: none; margin-right: 10px;" />
+                <a asp-action="MyProducts" class="genric-btn primary circle">Back to List</a>
             </div>
-            <a asp-action="MyProducts" class="primary-btn">Back to List</a>
+            
         </form>
     </div>
 </div>

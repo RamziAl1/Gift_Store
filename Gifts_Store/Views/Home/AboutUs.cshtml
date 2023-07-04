@@ -1,6 +1,6 @@
 ﻿@model AboutU
 @{
-    ViewData["Title"] = "AboutUs";
+    ViewData["Title"] = "About Us";
 	var RoleId = Context.Session.GetInt32("RoleId");
 	if (RoleId == 2)
 		Layout = "~/Views/Shared/_MakerLayout.cshtml";

@@ -1,11 +1,11 @@
 ﻿@model IEnumerable<Gifts_Store.Models.Userr>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Users";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h1>Index</h1>
+<h1>Users</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -14,13 +14,13 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Fname)
+                First name
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Lname)
+                Last name
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ImagePath)
+                Profile photo
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Status)
@@ -39,7 +39,6 @@
             </td>
             <td>
                 <img src="@Url.Content("~/images/" + item.ImagePath)" width="100" height="100" alt="user image" />
-                @*@Html.DisplayFor(modelItem => item.ImagePath)*@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Status)

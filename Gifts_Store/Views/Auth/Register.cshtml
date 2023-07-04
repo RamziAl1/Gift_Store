@@ -66,26 +66,31 @@
 				</div>
 				<div class="col-lg-6">
 					<div class="login_form_inner">
+						<h4 class="text-success">@TempData["SuccessMessage"]</h4>
 						<h3>Create an account</h3>
-						<form asp-action="Register" enctype="multipart/form-data" class="row login_form" method="post" id="contactForm">
+						<form asp-action="Register" enctype="multipart/form-data" class="row login_form" method="post" id="registerForm">
 							<div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
 							<div class="col-md-12 form-group">
 								<div class="row">
 									<label class="col-md-4 input-label d-flex align-items-center" for="role"><b class="d-flex align-items-center">Role</b></label>
-									<select class="col-md-8 form-control" id="roleSelector" name="role" onchange="toggleCategorySelector(this.value)" required>
-										<option value="2" selected>Select role</option>
-										<option value="3">Gift sender</option>
+									<select class="col-md-8 form-control" id="roleSelector" name="role" onchange="toggleCategorySelector(this.value)">
+										<option value="" selected>Select a role</option>
+										<option value="3" >Gift sender</option>
 										<option value="2">Gift maker</option>
 									</select>
+									
+									<span class="text-danger">
+										@Html.ValidationMessage("RoleError")
+									</span>
 								</div>
 							</div>
 
-							<div class="col-md-12 form-group" id="categorySelector" style="display: none;">
+							<div class="col-md-12 form-group" id="categorySelectorDiv" style="display: none;">
 								<div class="row">
 									<label for="categoryId" class="col-md-4 input-label d-flex align-items-center"><b class ="d-flex align-items-center">Category</b></label>
-									<select class="col-md-8 form-control" name="catId">
-										<option value="1" selected>Select category</option>
+									<select class="col-md-8 form-control" id="categorySelector" name="catId" >
+										<option value="" selected>Select a category</option>
 										@{
 											if (ViewBag.CategoryNames != null)
 												foreach (var item in ViewBag.CategoryNames)
@@ -93,8 +98,8 @@
 													<option value="@item.Value">@item.Text</option>
 												}
 										}
-										
 									</select>
+									<span class="text-danger">@Html.ValidationMessage("CatIdError")</span>
 								</div>
 								
 							</div>
@@ -104,7 +109,7 @@
 									<label for="UserName" class="col-md-4 input-label d-flex align-items-center"><b class="d-flex align-items-center">Username</b></label>
 									<input asp-for="UserName" placeholder="Username" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Username'" class="col-md-8 form-control" id="username" name="UserName">
 									<span asp-validation-for="UserName" class="text-danger"></span>
-									<span class="text-danger">@TempData["ErrorMessage"]</span>
+									<span class="text-danger">@TempData["UsernameErrorMessage"]</span>
 								</div>
 							</div>
 
@@ -137,6 +142,7 @@
 									<label for="Email" class="col-md-4 input-label d-flex align-items-center"><b class=" d-flex align-items-center">Email</b></label>
 									<input asp-for="Email" placeholder="Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email'" class="col-md-8 form-control" id="email" name="Email" type="email">
 									<span asp-validation-for="Email" class="text-danger"></span>
+									<span class="text-danger">@TempData["EmailErrorMessage"]</span>
 								</div>
 								
 							</div>
@@ -177,9 +183,15 @@
 	<script src="~/HomeAssets/js/main.js"></script>
 
 	<script>
+		var roleSelector = document.getElementById("roleSelector");
+		var categorySelectorDiv = document.getElementById("categorySelectorDiv");
+
 		function toggleCategorySelector(value) {
-			var categorySelector = document.getElementById("categorySelector");
-			categorySelector.style.display = value == "2" ? 'block' : 'none';
+			if (value === "2") {
+				categorySelectorDiv.style.display = "block";
+			} else {
+				categorySelectorDiv.style.display = "none";
+			}
 		}
 	</script>
 </body>

@@ -1,30 +1,30 @@
 ﻿@model Gifts_Store.Models.Userr
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "User details";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h1>Details</h1>
+<h1>User details</h1>
 
 <div>
-    <h4>Userr</h4>
+    <h4>User</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Fname)
+            First name
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Fname)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Lname)
+            Last name
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Lname)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ImageFile)
+            Profile photo
         </dt>
         <dd class = "col-sm-10">
             <img src="@Url.Content("~/images/" + Model.ImagePath)" width="100" height="100" alt="user image" />

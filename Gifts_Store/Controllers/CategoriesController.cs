@@ -102,8 +102,17 @@ namespace Gifts_Store.Controllers
 
             if (ModelState.IsValid)
             {
-                var categoryExists = _context.Categories.Where(x => x.CategoryName == category.CategoryName).SingleOrDefault();
-                if (categoryExists == null)
+                decimal? DBCategoryId = _context.Categories
+                    .Where(x => x.CategoryName.ToLower() == category.CategoryName.ToLower())
+                    .Select(x => x.Id)
+                    .SingleOrDefault();
+
+                if(DBCategoryId != null && DBCategoryId != category.Id)
+                {
+                    TempData["ErrorMessage"] = "Category name already exists.";
+                    return View(category);
+                }
+                else
                 {
                     try
                     {
@@ -122,8 +131,6 @@ namespace Gifts_Store.Controllers
                         }
                     }
                 }
-                else
-                    TempData["ErrorMessage"] = "category name already exists.";
                 
                 return RedirectToAction(nameof(Index));
             }

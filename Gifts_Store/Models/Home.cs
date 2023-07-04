@@ -12,7 +12,7 @@ public partial class Home
 
     public string? LogoPath { get; set; }
 
-	public string? BackgroundPath { get; set; }
+    public string? BackgroundPath { get; set; }
 
     [StringLength(30, ErrorMessage = "Site Name must contain a max of 30 characters")]
     public string SiteName { get; set; } = null!;

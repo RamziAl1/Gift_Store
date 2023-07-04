@@ -1,11 +1,11 @@
 ﻿@model IEnumerable<Gifts_Store.Models.Category>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Gift categories";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h1>Index</h1>
+<h1>Gift categories</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -14,7 +14,7 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.CategoryName)
+                Category name
             </th>
             <th></th>
         </tr>

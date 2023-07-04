@@ -7,9 +7,17 @@
 
 <h1>Testimonials</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+
+@{
+    var roleId = Context.Session.GetInt32("RoleId");
+    if (roleId != null && roleId != 1)
+    {
+        <p>
+            <a asp-action="Create">Create New</a>
+        </p>
+    }
+}
+
 <table class="table">
     <thead>
         <tr>
@@ -35,7 +43,7 @@
                 @Html.DisplayFor(modelItem => item.Status)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.User.Id)
+                @item.User?.Fname @item.User?.Lname
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

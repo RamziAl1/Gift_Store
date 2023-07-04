@@ -1,6 +1,7 @@
 ﻿using Gifts_Store.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 
 namespace Gifts_Store.Controllers
 {
@@ -16,6 +17,7 @@ namespace Gifts_Store.Controllers
 		public IActionResult BrowseGifts()
 		{
 			var gifts = _context.Gifts
+				.Include(x => x.Category)
 				.AsEnumerable();
 
 			ViewData["Categories"] = new SelectList(_context.Categories, "Id", "CategoryName");
@@ -23,14 +25,14 @@ namespace Gifts_Store.Controllers
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> BrowseGifts(string giftName, string giftCategory)
+		public IActionResult BrowseGifts(string giftName, string giftCategory)
 		{
-			await Console.Out.WriteLineAsync("----- giftName=" + giftName + "  ---  giftCategory=" + giftCategory + "  --------");
 			ViewData["Categories"] = new SelectList(_context.Categories, "Id", "CategoryName");
 
 			if ((giftName == null || giftName == "") && giftCategory == "All")
 			{
 				var gifts = _context.Gifts
+					.Include(x => x.Category)
 					.AsEnumerable();
 				return View(gifts);
 			}
@@ -38,6 +40,7 @@ namespace Gifts_Store.Controllers
 			{
 				var categoryId = Int32.Parse(giftCategory);
 				var gifts = _context.Gifts
+					.Include(x => x.Category)
 					.Where(x => x.CategoryId == categoryId)
 					.AsEnumerable();
 				return View(gifts);
@@ -45,6 +48,7 @@ namespace Gifts_Store.Controllers
 			else if ((giftName != null && giftName != "") && giftCategory == "All")
 			{
 				var gifts = _context.Gifts
+					.Include(x => x.Category)
 					.Where(x => x.Name.ToLower().Contains(giftName.ToLower()))
 					.AsEnumerable();
 				return View(gifts);
@@ -53,6 +57,7 @@ namespace Gifts_Store.Controllers
 			{
 				var categoryId = Int32.Parse(giftCategory);
 				var gifts = _context.Gifts
+					.Include(x => x.Category)
 					.Where(x => x.Name.ToLower().Contains(giftName.ToLower()) && x.CategoryId == categoryId)
 					.AsEnumerable();
 				return View(gifts);

@@ -372,6 +372,9 @@ public partial class ModelContext : DbContext
                 .IsUnicode(false)
                 .HasDefaultValueSql("'pending'")
                 .HasColumnName("STATUS");
+            entity.Property(e => e.VisaInfoId)
+                .HasColumnType("NUMBER(38)")
+                .HasColumnName("VISA_INFO_ID");
 
             entity.HasOne(d => d.Gift).WithMany(p => p.Orderrs)
                 .HasForeignKey(d => d.GiftId)

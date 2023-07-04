@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Tuple<Orderr, Gift>>
+﻿@model IEnumerable<Tuple<Orderr, Gift, Category>>
 @{
     ViewData["Title"] = "MyOrders";
     Layout = "~/Views/Shared/_SenderLayout.cshtml";
@@ -14,7 +14,16 @@
         </section>
     }
     <div class="container justify-content-center">
-        <center><h2>My orders</h2></center>
+        <center><h2 >My orders</h2></center>
+        @if (TempData["CancelOrderMessage"] != null)
+        {
+            <center>
+                <h4 class="text-primary">
+                    @TempData["CancelOrderMessage"]
+                </h4>
+            </center>
+        }
+        
         <div class="billing_details">
             @foreach (var item in Model)
             {
@@ -134,6 +143,8 @@
                                         }
                                         <hr />
                                         <h6>Order Quantity: @item.Item1.Quantity</h6>
+                                        <hr />
+                                        <h6>Category: @item.Item3.CategoryName</h6>
                                     </div>
                                 </div>
                             </div>
@@ -164,6 +175,14 @@
                                     </div>
                                 </div>
                             }
+                            <div class="row justify-content-center py-5">
+                                <div class="col-sm-6 justify-content-center parent-element">
+                                    <form method="get" asp-controller="GiftSender" asp-action="CancelOrder">
+                                        <input type="hidden" name="id" asp-for="@item.Item1.Id" />
+                                        <button type="submit" class="primary-btn child-element w-100 d-block" style="border:none;">Cancel order</button>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
                         
                     </div>

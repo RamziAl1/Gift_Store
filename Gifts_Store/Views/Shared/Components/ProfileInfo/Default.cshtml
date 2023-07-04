@@ -1,0 +1,19 @@
+﻿@model Userr
+
+<style>
+    .unclickable {
+        pointer-events: none;
+        cursor: default;
+        text-decoration: none;
+        color: inherit;
+    }
+</style>
+
+<div class="pl-3 d-flex">
+    <div class="rounded-circle mr-2">
+        <img src=@Url.Content("~/images/" + Model.ImagePath) width="34" height="34" style="max-height: 34px;" class="rounded-circle elevation-2" alt="Profile pic">
+    </div>
+    <div class="info d-flex align-items-center">
+        <a href="#" class="d-block unclickable">@Model.Fname @Model.Lname</a>
+    </div>
+</div>

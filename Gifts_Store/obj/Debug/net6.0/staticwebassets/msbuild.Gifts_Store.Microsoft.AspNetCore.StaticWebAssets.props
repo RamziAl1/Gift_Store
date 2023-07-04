@@ -43488,6 +43488,22 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\170f75cf-4204-4f73-a8f1-4c3282aff412_profilepic1.jpg))</OriginalItemSpec>
     </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\21804a1f-dd92-47db-874d-a2547b0e8a1f_Screenshot 2023-07-02 191107.png))">
+      <SourceType>Package</SourceType>
+      <SourceId>Gifts_Store</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/Gifts_Store</BasePath>
+      <RelativePath>images/21804a1f-dd92-47db-874d-a2547b0e8a1f_Screenshot 2023-07-02 191107.png</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\21804a1f-dd92-47db-874d-a2547b0e8a1f_Screenshot 2023-07-02 191107.png))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\4a52fc64-75e3-4b70-87a4-7496fc60abbd_brown cowboy hat.jpg))">
       <SourceType>Package</SourceType>
       <SourceId>Gifts_Store</SourceId>

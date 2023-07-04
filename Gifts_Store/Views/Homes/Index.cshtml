@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<Gifts_Store.Models.Home>
 
 @{
+    ViewData["Title"] = "Home page data";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
@@ -9,30 +10,27 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
+    <title>Home page data</title>
 </head>
 <body>
-<p>
+@*<p>
     <a asp-action="Create">Create New</a>
-</p>
+</p>*@
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.ImageLogo)
+                Logo
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ImageBackground)
+                Background image
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.SiteName)
+                Site name
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.WelcomeText)
+                Welcome text
             </th>
-            @*<th>
-                @Html.DisplayNameFor(model => model.Admin)
-            </th>*@
             <th></th>
         </tr>
     </thead>
@@ -41,22 +39,21 @@
         <tr>
             <td>
                 <img src="@Url.Content("~/images/" + item.LogoPath)" width="100" height="100" alt="logo image" />
-                @*@Html.DisplayFor(modelItem => item.LogoPath)*@
             </td>
             <td>
                 <img src="@Url.Content("~/images/" + item.BackgroundPath)" width="100" height="100" alt="background image" />
-                @*@Html.DisplayFor(modelItem => item.SiteName)*@
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SiteName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.WelcomeText)
             </td>
-            @*<td>
-                @Html.DisplayFor(modelItem => item.Admin.Id)
-            </td>*@
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> 
+                @*|
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>*@
             </td>
         </tr>
 }

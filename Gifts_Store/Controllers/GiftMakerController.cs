@@ -1,14 +1,10 @@
 ﻿using Gifts_Store.Enums;
 using Gifts_Store.Models;
 using Gifts_Store.Services;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
-using System.Reflection.Metadata.Ecma335;
 using System.Text;
 
 namespace Gifts_Store.Controllers
@@ -47,26 +43,10 @@ namespace Gifts_Store.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddGift([Bind("Name,Sale,Price,Quantity,ImageFile")] Gift gift)
         {
-            foreach (var key in ModelState.Keys)
-            {
-                if (ModelState.TryGetValue(key, out var entry) && entry.Errors.Count > 0)
-                {
-                    foreach (var error in entry.Errors)
-                    {
-                        var errorMessage = error.ErrorMessage;
-                        var attributeName = key;
-
-                        Console.WriteLine($"Error: {errorMessage} (Attribute: {attributeName})");
-                    }
-                }
-            }
-
             if (ModelState.IsValid)
             {
-                await Console.Out.WriteLineAsync("ModelSate.IsValid succeeded");
                 string wwwRootPath = _environment.WebRootPath;
                 // generate generate unique universal id
                 string fileName = Guid.NewGuid().ToString() + "_" + gift?.ImageFile?.FileName;
@@ -112,13 +92,11 @@ namespace Gifts_Store.Controllers
 
         public async Task<IActionResult> EditGift(decimal? id)
         {
-            Console.WriteLine("-----------------  in editGift get");
             if (id == null || _context.Gifts == null)
             {
                 return NotFound();
             }
 
-            await Console.Out.WriteLineAsync("----------------- GiftId != null");
 
             var gift = await _context.Gifts.FindAsync(id);
             if (gift == null)
@@ -126,15 +104,12 @@ namespace Gifts_Store.Controllers
                 return NotFound();
             }
 
-            await Console.Out.WriteLineAsync($"---------  giftId={id}  ------ {gift.Name}");
-
             return View(gift);
         }
 
         [HttpPost]
         public async Task<IActionResult> EditGift([Bind("Id,Name,Sale,Price,Quantity,ImagePath,ImageFile,AddedDate,CategoryId,GiftMakerId")] Gift gift)
         {
-            Console.WriteLine("----------------   in edit gift post");
             if (ModelState.IsValid)
             {
                 try
@@ -231,7 +206,7 @@ namespace Gifts_Store.Controllers
                         join g in _context.Gifts on gm.Id equals g.GiftMakerId
                         join o in _context.Orderrs on g.Id equals o.GiftId
                         where gm.Id == giftMakerId
-                        orderby o.Status descending
+                        orderby o.OrderDate descending
                         select Tuple.Create(o, g);
             var model = query.AsEnumerable();
 
@@ -239,7 +214,6 @@ namespace Gifts_Store.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> ApproveGiftRequest(decimal id)
         {
             if (_context.Orderrs == null)
@@ -275,21 +249,29 @@ namespace Gifts_Store.Controllers
             if (gift == null)
                 return Problem("Gift for order not found");
 
+            if(gift.Quantity < orderr.Quantity)
+            {
+                TempData["QuantityNotEnoughmessage" + orderr.Id] = "Not enough of that item in stock, please restock before approving the request";
+                return RedirectToAction(nameof(MyOrders));
+            }
             gift.Quantity = gift.Quantity - orderr.Quantity;
             _context.Update(gift);
 
-            string recipientName = $"{senderInfo?.Item1.Fname} {senderInfo?.Item1.Lname}";
-            string giftName = gift.Name;
-            string orderQuantity = orderr.Quantity.ToString();
-            string orderAddress = orderr.Address;
-            string orderArrivalDate = orderr.ExpectedArrivalDate.ToString();
-            string senderName = "Gift Store";
+            Task.Run(() =>
+            {
+                string recipientName = $"{senderInfo?.Item1.Fname} {senderInfo?.Item1.Lname}";
+                string giftName = gift.Name;
+                string orderQuantity = orderr.Quantity.ToString();
+                string orderAddress = orderr.Address;
+                string orderArrivalDate = orderr.ExpectedArrivalDate.ToString();
+                string senderName = "Gift Store";
 
-            string emailSubject = EmailTemplate.GiftRequestApproval.GetSubject();
-            string emailBody = EmailTemplate.GiftRequestApproval.GetBody(recipientName, giftName, orderQuantity, orderAddress, orderArrivalDate, senderName);
-            string? toEmail = senderInfo?.Item2?.Email;
+                string emailSubject = EmailTemplate.GiftRequestApproval.GetSubject();
+                string emailBody = EmailTemplate.GiftRequestApproval.GetBody(recipientName, giftName, orderQuantity, orderAddress, orderArrivalDate, senderName);
+                string? toEmail = senderInfo?.Item2?.Email;
 
-            EmailService.SendEmailFromGiftShop(emailBody, emailSubject, toEmail);
+                EmailService.SendEmailFromGiftShop(emailBody, emailSubject, toEmail);
+            });
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(MyOrders));
@@ -297,7 +279,6 @@ namespace Gifts_Store.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> RejectGiftRequest(decimal id)
         {
             if (_context.Orderrs == null)
@@ -331,15 +312,18 @@ namespace Gifts_Store.Controllers
             if (gift == null)
                 return Problem("Gift for order not found");
 
-            string recipientName = $"{senderInfo?.Item1.Fname} {senderInfo?.Item1.Lname}";
-            string giftName = gift.Name;
-            string senderName = "Gift Store";
+            Task.Run(() =>
+            {
+                string recipientName = $"{senderInfo?.Item1.Fname} {senderInfo?.Item1.Lname}";
+                string giftName = gift.Name;
+                string senderName = "Gift Store";
 
-            string emailSubject = EmailTemplate.GiftRequestRejection.GetSubject();
-            string emailBody = EmailTemplate.GiftRequestRejection.GetBody(recipientName, giftName, senderName);
-            string? toEmail = senderInfo?.Item2?.Email;
+                string emailSubject = EmailTemplate.GiftRequestRejection.GetSubject();
+                string emailBody = EmailTemplate.GiftRequestRejection.GetBody(recipientName, giftName, senderName);
+                string? toEmail = senderInfo?.Item2?.Email;
 
-            EmailService.SendEmailFromGiftShop(emailBody, emailSubject, toEmail);
+                EmailService.SendEmailFromGiftShop(emailBody, emailSubject, toEmail);
+            });
 
             await _context.SaveChangesAsync();
 
@@ -347,7 +331,6 @@ namespace Gifts_Store.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> SetOrderArrived(decimal? id)
         {
             if (id == null)
@@ -373,20 +356,23 @@ namespace Gifts_Store.Controllers
             if (gift == null)
                 return Problem("Gift for order not found");
 
-            string recipientName = $"{senderInfo?.Item1.Fname} {senderInfo?.Item1.Lname}";
-            string orderDate = order.OrderDate.Date.ToString("yyyy-MM-dd");
-            string expectedArrivalDate = order.ExpectedArrivalDate.Date.ToString("yyyy-MM-dd");
-            string orderAddress = order.Address;
-            string giftName = gift.Name;
-            string orderQuantity = order.Quantity.ToString();
-            string orderTotalPrice = order.TotalPrice.ToString();
-            string senderName = "Gift Store";
+            Task.Run(() =>
+            {
+                string recipientName = $"{senderInfo?.Item1.Fname} {senderInfo?.Item1.Lname}";
+                string orderDate = order.OrderDate.Date.ToString("yyyy-MM-dd");
+                string expectedArrivalDate = order.ExpectedArrivalDate.Date.ToString("yyyy-MM-dd");
+                string orderAddress = order.Address;
+                string giftName = gift.Name;
+                string orderQuantity = order.Quantity.ToString();
+                string orderTotalPrice = order.TotalPrice.ToString();
+                string senderName = "Gift Store";
 
-            string emailSubject = EmailTemplate.OrderArrival.GetSubject();
-            string emailBody = EmailTemplate.OrderArrival.GetBody(recipientName, orderDate, expectedArrivalDate, orderAddress, giftName, orderQuantity, orderTotalPrice, senderName);
-            string? toEmail = senderInfo?.Item2?.Email;
+                string emailSubject = EmailTemplate.OrderArrival.GetSubject();
+                string emailBody = EmailTemplate.OrderArrival.GetBody(recipientName, orderDate, expectedArrivalDate, orderAddress, giftName, orderQuantity, orderTotalPrice, senderName);
+                string? toEmail = senderInfo?.Item2?.Email;
 
-            EmailService.SendEmailFromGiftShop(emailBody, emailSubject, toEmail);
+                EmailService.SendEmailFromGiftShop(emailBody, emailSubject, toEmail);
+            });
 
             _context.Update(order);
             await _context.SaveChangesAsync();
@@ -432,7 +418,7 @@ namespace Gifts_Store.Controllers
         {
             if (HttpContext != null && HttpContext.Session != null)
             {
-                int userLoginId = (int)HttpContext?.Session?.GetInt32("userLoginId");
+                int? userLoginId = HttpContext?.Session?.GetInt32("userLoginId");
                 var model = _context.UserLogins
                     .Include(x => x.User)
                     .Include(x => x.Role)
@@ -547,13 +533,12 @@ namespace Gifts_Store.Controllers
                 .SelectMany(v => v.Errors)
                 .Select(e => e.ErrorMessage)
                 .ToList();
-            await Console.Out.WriteLineAsync("error messages("+ errorMessages.Count +")=");
 
             HttpContext.Session.Set("ErrorMessages", Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(errorMessages)));
 
             if (ModelState.IsValid)
             {
-                string username = HttpContext.Session.GetString("Username");
+                string? username = HttpContext.Session.GetString("Username");
                 var userLogin = _context.UserLogins.Where(x => x.UserName == username && x.Password == oldPassword).SingleOrDefault();
                 if (userLogin != null)
                 {

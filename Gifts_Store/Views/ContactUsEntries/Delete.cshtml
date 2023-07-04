@@ -1,6 +1,7 @@
 ﻿@model Gifts_Store.Models.ContactUsEntry
 
 @{
+    ViewData["Title"] = "Delete contact Us entry";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
@@ -9,7 +10,7 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Delete</title>
+    <title>Delete contact Us entry</title>
 </head>
 <body>
 
@@ -42,12 +43,6 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Message)
         </dd>
-        @*<dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Admin)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Admin.Id)
-        </dd>*@
     </dl>
     
     <form asp-action="Delete">

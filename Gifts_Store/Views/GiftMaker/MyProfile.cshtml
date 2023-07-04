@@ -1,8 +1,20 @@
 ﻿@model Gifts_Store.Models.UserLogin
 @{
-    ViewData["Title"] = "MyProfile";
+    ViewData["Title"] = "My Profile";
     Layout = "~/Views/Shared/_MakerLayout.cshtml";
 }
+
+<!-- Start Banner Area -->
+<section class="banner-area organic-breadcrumb">
+    <div class="container">
+        <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+            <div class="col-first">
+                <h1>Mt Profile</h1>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Banner Area -->
 
 <div class="billing_details" style="padding-top: 12rem; padding-bottom: 4rem;">
     <div class="row justify-content-center">
@@ -53,7 +65,7 @@
                     </div>
                     <div class="form-group row justify-content-center">
                         <div class="offset-sm-4 col-sm-6">
-                            <a asp-controller="GiftMaker" asp-action="EditProfile" class="primary-btn">Edit Profile</a>
+                            <a asp-controller="GiftMaker" asp-action="EditProfile" class="genric-btn primary circle">Edit Profile</a>
                         </div>
                     </div>
             </div>

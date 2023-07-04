@@ -30,72 +30,94 @@ namespace Gifts_Store.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AllowAnonymous]
-        public async Task<IActionResult> Register([Bind("UserName, Password, Email, Fname, Lname, ImageFile")] SignUpViewModel newUserData
-            , string role
-            , string catId)
+        public async Task<IActionResult> Register([Bind("UserName, Password, Email, Fname, Lname, ImageFile")] SignUpViewModel newUserData, string role, string catId)
         {
             await Console.Out.WriteLineAsync("In Register POST");
+
 			ViewData["CategoryNames"] = new SelectList(_context.Categories, "Id", "CategoryName");
+
+			if (string.IsNullOrEmpty(role))
+			{
+				ModelState.AddModelError("RoleError", "Role is required.");
+			}
+
+			if (string.IsNullOrEmpty(catId))
+			{
+				ModelState.AddModelError("CatIdError", "Category is required.");
+			}
+
 
 			if (ModelState.IsValid)
             {
-				var usernameExists = _context.UserLogins.Where(x => x.UserName == newUserData.UserName).SingleOrDefault();
-                if (usernameExists == null)
+				decimal? usernameExistsId = _context.UserLogins
+                    .Where(x => x.UserName == newUserData.UserName)
+                    .Select(x => x.UserId)
+                    .SingleOrDefault();
+                if(usernameExistsId != null)
                 {
-                    string wwwRootPath = _environment.WebRootPath;
-                    string fileName = Guid.NewGuid().ToString() + "_" + newUserData.ImageFile.FileName;
-                    string path = Path.Combine(wwwRootPath + "/Images/", fileName);
-                    using (var filestream = new FileStream(path, FileMode.Create))
-                    {
-                        await newUserData.ImageFile.CopyToAsync(filestream);
-                    }
-                    int roleId = Int32.Parse(role);
+					TempData["UsernameErrorMessage"] = "Username already exists.";
+                    return View();
+				}
 
-                    // save user entry
-					Userr userModel = new Userr();
-                    userModel.Fname = newUserData.Fname;
-                    userModel.Lname = newUserData.Lname;
-					userModel.ImagePath = fileName;
-					userModel.Status = roleId == 3 ? "approved" : "pending";
-					_context.Add(userModel);
-					await _context.SaveChangesAsync();
-                    // save role dependant entry
-					if (roleId == 2)
-                    {
-                        GiftMaker giftMaker = new GiftMaker();
-                        giftMaker.CategoryId = Int32.Parse(catId);
-                        giftMaker.UserId = userModel.Id;
-						_context.Add(giftMaker);
-						await _context.SaveChangesAsync();
-					} 
-                    else if (roleId == 3)
-                    {
-                        GiftSender giftSender = new GiftSender();
-                        giftSender.UserId = userModel.Id; 
-                        _context.Add(giftSender);
-						await _context.SaveChangesAsync();
-					}
-                    await Console.Out.WriteLineAsync("roleid= " + roleId);
-                    // save the user_login entry 
-                    UserLogin login = new();
-                    login.RoleId = roleId;
-                    login.UserName = newUserData.UserName;
-                    login.Password = newUserData.Password;
-                    login.Email = newUserData.Email;
-                    login.UserId = userModel.Id;
-                    _context.Add(login);
-                    await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Register));
+				decimal? emailExistsId = _context.UserLogins
+					.Where(x => x.Email == newUserData.Email)
+					.Select(x => x.UserId)
+					.SingleOrDefault();
+				if (emailExistsId != null)
+				{
+					TempData["EmailErrorMessage"] = "Email already exists.";
+					return View();
+				}
+
+                string wwwRootPath = _environment.WebRootPath;
+                string fileName = Guid.NewGuid().ToString() + "_" + newUserData.ImageFile.FileName;
+                string path = Path.Combine(wwwRootPath + "/Images/", fileName);
+                using (var filestream = new FileStream(path, FileMode.Create))
+                {
+                    await newUserData.ImageFile.CopyToAsync(filestream);
                 }
-                else
-                    TempData["ErrorMessage"] = "Username already exists.";
+                int roleId = Int32.Parse(role);
+
+                // save user entry
+				Userr userModel = new Userr();
+                userModel.Fname = newUserData.Fname;
+                userModel.Lname = newUserData.Lname;
+				userModel.ImagePath = fileName;
+				userModel.Status = roleId == 3 ? "approved" : "pending";
+				_context.Add(userModel);
+				await _context.SaveChangesAsync();
+                // save role dependant entry
+				if (roleId == 2)
+                {
+                    GiftMaker giftMaker = new GiftMaker();
+                    giftMaker.CategoryId = Int32.Parse(catId);
+                    giftMaker.UserId = userModel.Id;
+					_context.Add(giftMaker);
+					await _context.SaveChangesAsync();
+				} 
+                else if (roleId == 3)
+                {
+                    GiftSender giftSender = new GiftSender();
+                    giftSender.UserId = userModel.Id; 
+                    _context.Add(giftSender);
+					await _context.SaveChangesAsync();
+				}
+                await Console.Out.WriteLineAsync("roleid= " + roleId);
+                // save the user_login entry 
+                UserLogin login = new();
+                login.RoleId = roleId;
+                login.UserName = newUserData.UserName;
+                login.Password = newUserData.Password;
+                login.Email = newUserData.Email;
+                login.UserId = userModel.Id;
+                _context.Add(login);
+                await _context.SaveChangesAsync();
+                TempData["SuccessMessage"] = "you have registered successfully";
+                return RedirectToAction(nameof(Register));
             }
-			else
-			{
-                await Console.Out.WriteLineAsync("data validation failed");
-                return View();
-			}
-			return View();
+
+            await Console.Out.WriteLineAsync("data validation failed");
+            return View();
         }
 
         [AllowAnonymous]

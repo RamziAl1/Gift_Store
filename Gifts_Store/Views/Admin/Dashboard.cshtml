@@ -31,22 +31,21 @@
         <!-- small box -->
         <div class="small-box bg-info">
             <div class="inner">
-                <h3>@Model.GetValueOrDefault("orderCount")</h3>
-
-            <p>Number of Orders</p>
+            <h3>@Model.GetValueOrDefault("totalOrderCount")</h3>
+            <p>Total number of Orders</p>
             </div>
         </div>
         </div>
         <!-- ./col -->
         <div class="col-lg-3 col-6">
-        <!-- small box -->
-        <div class="small-box bg-success">
-            <div class="inner">
-                <h3>@Model.GetValueOrDefault("giftCount")</h3>
+            <!-- small box -->
+            <div class="small-box bg-success">
+                <div class="inner">
+                    <h3>@Model.GetValueOrDefault("approvedOrderCount")</h3>
 
-            <p>Number of Gifts</p>
+                    <p>Number of approved orders</p>
+                </div>
             </div>
-        </div>
         </div>
         <!-- ./col -->
         <div class="col-lg-3 col-6">
@@ -67,6 +66,17 @@
                 <h3>@Model.GetValueOrDefault("categoryCount")</h3>
 
             <p>Number of Categories</p>
+            </div>
+        </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-success">
+            <div class="inner">
+                <h3>@Model.GetValueOrDefault("giftCount")</h3>
+
+            <p>Number of Gifts</p>
             </div>
         </div>
         </div>

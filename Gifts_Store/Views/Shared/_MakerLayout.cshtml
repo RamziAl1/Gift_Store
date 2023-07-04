@@ -34,13 +34,18 @@
 	<link rel="stylesheet" href="~/HomeAssets/css/ion.rangeSlider.skinFlat.css" />
 	<link rel="stylesheet" href="~/HomeAssets/css/magnific-popup.css">
 	<link rel="stylesheet" href="~/HomeAssets/css/main.css">
+	<style>
+		.genric-btn {
+			font-size:1em;
+		}
+	</style>
 </head>
 <body>
 
 	<!-- Start Header Area -->
 	<header class="header_area sticky-header">
 		<div class="main_menu">
-			<nav class="navbar navbar-expand-lg navbar-light main_box">
+			<nav class="navbar navbar-expand-lg navbar-light main_box" style="height: 80px;">
 				<div class="container">
 					<!-- Brand and toggle get grouped for better mobile display -->
 					<a class="navbar-brand logo_h" href="index.html">
@@ -56,7 +61,7 @@
 					<!-- Collect the nav links, forms, and other content for toggling -->
 					<div class="collapse navbar-collapse offset" id="navbarSupportedContent">
 						<h4>Maker</h4>
-						<ul class="nav navbar-nav menu_nav ml-auto">
+						<ul class="nav navbar-nav menu_nav ml-auto d-flex align-items-center">
 							<li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Home">Home</a></li>
 							<li class="nav-item"><a class="nav-link" asp-controller="GiftMaker" asp-action="MyOrders">My Orders</a></li>
 							<li class="nav-item submenu dropdown">
@@ -69,15 +74,14 @@
 							</li>
 							<li class="nav-item submenu dropdown">
 								<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account</a>
-								
 								<ul class="dropdown-menu" style="display: none;">
-
 									<li class="nav-item"><a class="nav-link" asp-controller="GiftMaker" asp-action="MyProducts">My Products</a></li>
 									<li class="nav-item"><a class="nav-link" asp-controller="GiftMaker" asp-action="MyProfile">My Profile</a></li>
 									<li class="nav-item"><a class="nav-link" asp-controller="GiftMaker" asp-action="MyTestimonial">My Testimonial</a></li>
 									<li class="nav-item"><a class="nav-link" asp-controller="Auth" asp-action="Logout">Logout</a></li>
 								</ul>
 							</li>
+							<li class="nav-item">@await Component.InvokeAsync("ProfileInfo")</li>
 							@await Component.InvokeAsync("MakerNotifications")
 						</ul>
 					</div>

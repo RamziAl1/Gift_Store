@@ -37,7 +37,6 @@
             <div class="animation__shake">
                 @await Component.InvokeAsync("Logo")
             </div>
-            @*<img class="animation__shake" src="~/AdminAssets/dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">*@
         </div>
 
         <!-- Navbar -->
@@ -70,11 +69,16 @@
                 </div>
                 <br />
                 <br />
+               
                 <span class="brand-text font-weight-light"></span>
             </a>
 
             <!-- Sidebar -->
             <div class="sidebar">
+                <div class="pt-3">
+                    @await Component.InvokeAsync("ProfileInfo")
+                </div>
+                <hr />
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
@@ -202,6 +206,13 @@
             <!-- Control sidebar content goes here -->
         </aside>
         <!-- /.control-sidebar -->
+        <footer class="main-footer">
+            <strong>Copyright © 2023 Ramzi Gift Shop Admin Dashboard.</strong>
+            All rights reserved.
+            <div class="float-right d-none d-sm-inline-block">
+                <b>Version</b> 1.0.0
+            </div>
+        </footer>
     </div>
     <!-- ./wrapper -->
     <script>

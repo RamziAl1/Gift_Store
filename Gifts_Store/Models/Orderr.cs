@@ -11,7 +11,6 @@ public partial class Orderr
     
     public DateTime OrderDate { get; set; }
 
-	
 	public DateTime ExpectedArrivalDate { get; set; }
 
 	[Required]
@@ -34,7 +33,11 @@ public partial class Orderr
 
     public decimal? GiftId { get; set; }
 
+    public decimal? VisaInfoId { get; set; }
+
     public virtual Gift? Gift { get; set; }
 
     public virtual GiftSender? GiftSender { get; set; }
+
+    public virtual VisaInfo? VisaInfo { get; set; }
 }

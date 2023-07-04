@@ -24,7 +24,7 @@
 	</section>
 }
 
-<div class="container py-5" >
+<div class="container py-5">
 	<div class="row">
 		<div class="col-xl-3 col-lg-4 col-md-5">
 			<div class="sidebar-filter mt-50">
@@ -39,13 +39,13 @@
 					</div>
 					<div class="top-filter-head">Filter Categories</div>
 					<div class="common-filter">
-						<ul>
+						<ul class="mt-2">
 							<li class="filter-list"><input class="pixel-radio" type="radio" id="All" name="giftCategory" value="All" checked><label for="All">All</label></li>
 							@{
 								if (ViewBag.Categories != null)
 									foreach (var item in ViewBag.Categories)
 									{
-										<li class="filter-list"><input class="pixel-radio" type="radio" id="@item.Value" name="giftCategory" value="@item.Value"><label for="@item.Value">@item.Text @item.Value</label></li>
+										<li class="filter-list"><input class="pixel-radio" type="radio" id="@item.Value" name="giftCategory" value="@item.Value"><label for="@item.Value">@item.Text</label></li>
 									}
 							}
 						</ul>
@@ -80,6 +80,8 @@
 										}
 										<hr />
 										<h6>Quantity: @item.Quantity</h6>
+										<hr />
+										<h6>Category: @item.Category?.CategoryName</h6>
 									</div>
 									<div class="prd-bottom">
 										<a asp-action="OrderRequest" asp-route-id="@item.Id" class="social-info">

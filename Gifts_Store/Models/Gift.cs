@@ -28,7 +28,7 @@ public partial class Gift
     [NotMapped]
     public virtual IFormFile? ImageFile { get; set; }
 
-    
+
     public DateTime AddedDate { get; set; }
 
     public decimal? CategoryId { get; set; }
