@@ -22,9 +22,19 @@ namespace Gifts_Store.Controllers
         // GET: Userrs
         public async Task<IActionResult> Index()
         {
-              return _context.Userrs != null ? 
-                          View(await _context.Userrs.ToListAsync()) :
-                          Problem("Entity set 'ModelContext.Userrs'  is null.");
+            if(_context.Userrs == null)
+                return Problem("Entity set 'ModelContext.Userrs'  is null.");
+            if (_context.UserLogins == null)
+                return Problem("Entity set 'ModelContext.UserLogins'  is null.");
+            if (_context.Rolees == null)
+                return Problem("Entity set 'ModelContext.Rolees'  is null.");
+            var users = await (from u in _context.Userrs
+                               join ul in _context.UserLogins on u.Id equals ul.UserId
+                               join r in _context.Rolees on ul.RoleId equals r.Id
+                               where r.Id != 1
+                               select Tuple.Create(u, ul, r)).ToListAsync();
+
+            return View(users);
         }
 
         // GET: Userrs/Details/5

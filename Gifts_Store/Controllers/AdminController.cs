@@ -99,7 +99,7 @@ namespace Gifts_Store.Controllers
                         join u in _context.Userrs on gm.UserId equals u.Id
                         join ul in _context.UserLogins on u.Id equals ul.UserId
                         select Tuple.Create(g, ul.UserName, c.CategoryName))
-                        .AsEnumerable();
+                        .ToList();
 
             return View(giftsWithCategories);
         }
