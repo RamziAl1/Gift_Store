@@ -1,0 +1,38 @@
+﻿@model Gifts_Store.Models.NotificationsViewModel
+
+<!-- Notifications Dropdown Menu -->
+<li class="nav-item dropdown ml-5">
+    <a class="nav-link" data-toggle="dropdown" href="#">
+        @{
+            if (Model != null && Model.Count != 0)
+            {
+                <i class="ti-shopping-cart-full"></i>
+                <span class="badge badge-warning navbar-badge">@Model.Count</span>
+            }
+            else
+            {
+                <i class="ti-shopping-cart"></i>
+            }
+        }
+    </a>
+    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+        <span class="dropdown-item dropdown-header">@Model?.Count Items</span>
+        <div class="dropdown-divider"></div>
+        @{
+            if (Model != null && Model.Count != 0 && Model.Notifications != null)
+                foreach (var item in Model.Notifications)
+                {
+                    <div class="dropdown-item text-wrap">
+                        <i class="ti-gift mr-2"></i> @item.First
+                    </div>
+                    //<a asp-controller="@item.Second[0]" asp-action="@item.Second[1]" class="dropdown-item text-wrap">
+                    //    <i class="ti-gift mr-2"></i> @item.First
+                    //</a>
+                }
+        }
+        <div class="dropdown-divider"></div>
+        <a asp-controller="GiftSender" asp-action="MyCart" class="dropdown-item genric-btn primary radius">
+            Proceed to checkout
+        </a>
+    </div>
+</li>
