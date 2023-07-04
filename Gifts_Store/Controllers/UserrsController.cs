@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Gifts_Store.Models;
+using Microsoft.Extensions.Hosting;
 
 namespace Gifts_Store.Controllers
 {
@@ -58,40 +59,139 @@ namespace Gifts_Store.Controllers
         // GET: Userrs/Create
         public IActionResult Create()
         {
-            return View();
+			ViewData["CategoryNames"] = new SelectList(_context.Categories, "Id", "CategoryName");
+			return View();
         }
 
         // POST: Userrs/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Fname,Lname,ImagePath,ImageFile,Status")] Userr userr)
-        {
-            if (ModelState.IsValid)
-            {
-                string wwwRootPath = _webHostEnvironment.WebRootPath;
-                // generate generate unique universal id
-                string fileName = Guid.NewGuid().ToString() + "_" + userr.ImageFile.FileName;
-                // define path to save file in
-                string path = Path.Combine(wwwRootPath + "/images/", fileName);
-                // save the file
-                using (var filestream = new FileStream(path, FileMode.Create))
-                {
-                    await userr.ImageFile.CopyToAsync(filestream);
-                }
-                // save path to model
-                userr.ImagePath = fileName;
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> _Create([Bind("Id,Fname,Lname,ImagePath,ImageFile,Status")] Userr userr)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        string wwwRootPath = _webHostEnvironment.WebRootPath;
+        //        // generate generate unique universal id
+        //        string fileName = Guid.NewGuid().ToString() + "_" + userr.ImageFile.FileName;
+        //        // define path to save file in
+        //        string path = Path.Combine(wwwRootPath + "/images/", fileName);
+        //        // save the file
+        //        using (var filestream = new FileStream(path, FileMode.Create))
+        //        {
+        //            await userr.ImageFile.CopyToAsync(filestream);
+        //        }
+        //        // save path to model
+        //        userr.ImagePath = fileName;
 
-                _context.Add(userr);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(userr);
-        }
+        //        _context.Add(userr);
+        //        await _context.SaveChangesAsync();
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    return View(userr);
+        //}
 
-        // GET: Userrs/Edit/5
-        public async Task<IActionResult> Edit(decimal? id)
+
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public async Task<IActionResult> Create([Bind("UserName, Password, Email, Fname, Lname, ImageFile")] SignUpViewModel newUserData, string role, string catId)
+		{
+			await Console.Out.WriteLineAsync("In USer Create POST");
+
+			ViewData["CategoryNames"] = new SelectList(_context.Categories, "Id", "CategoryName");
+
+			if (string.IsNullOrEmpty(role))
+			{
+				ModelState.AddModelError("RoleError", "Role is required.");
+			}
+
+			if (role != null && role == "2" && string.IsNullOrEmpty(catId))
+			{
+				ModelState.AddModelError("CatIdError", "Category is required.");
+			}
+			else
+			{
+				ModelState.Remove("catId");
+			}
+
+			if (ModelState.IsValid)
+			{
+				decimal? usernameExistsId = _context.UserLogins
+					.Where(x => x.UserName == newUserData.UserName)
+					.Select(x => x.UserId)
+					.SingleOrDefault();
+				if (usernameExistsId != null)
+				{
+					TempData["UsernameErrorMessage"] = "Username already exists.";
+					return View();
+				}
+
+				decimal? emailExistsId = _context.UserLogins
+					.Where(x => x.Email == newUserData.Email)
+					.Select(x => x.UserId)
+					.SingleOrDefault();
+				if (emailExistsId != null)
+				{
+					TempData["EmailErrorMessage"] = "Email already exists.";
+					return View();
+				}
+
+				string wwwRootPath = _webHostEnvironment.WebRootPath;
+				string fileName = Guid.NewGuid().ToString() + "_" + newUserData.ImageFile.FileName;
+				string path = Path.Combine(wwwRootPath + "/Images/", fileName);
+				using (var filestream = new FileStream(path, FileMode.Create))
+				{
+					await newUserData.ImageFile.CopyToAsync(filestream);
+				}
+				int roleId = Int32.Parse(role);
+
+				// save user entry
+				Userr userModel = new Userr();
+				userModel.Fname = newUserData.Fname;
+				userModel.Lname = newUserData.Lname;
+				userModel.ImagePath = fileName;
+				userModel.Status = roleId == 3 ? "approved" : "pending";
+				_context.Add(userModel);
+				await _context.SaveChangesAsync();
+				// save role dependant entry
+				if (roleId == 2)
+				{
+					GiftMaker giftMaker = new GiftMaker();
+					giftMaker.CategoryId = Int32.Parse(catId);
+					giftMaker.UserId = userModel.Id;
+					_context.Add(giftMaker);
+					await _context.SaveChangesAsync();
+				}
+				else if (roleId == 3)
+				{
+					GiftSender giftSender = new GiftSender();
+					giftSender.UserId = userModel.Id;
+					_context.Add(giftSender);
+					await _context.SaveChangesAsync();
+				}
+				await Console.Out.WriteLineAsync("roleid= " + roleId);
+				// save the user_login entry 
+				UserLogin login = new();
+				login.RoleId = roleId;
+				login.UserName = newUserData.UserName;
+				login.Password = newUserData.Password;
+				login.Email = newUserData.Email;
+				login.UserId = userModel.Id;
+				_context.Add(login);
+				await _context.SaveChangesAsync();
+				TempData["SuccessMessage"] = "you have registered successfully";
+				return RedirectToAction(nameof(Create));
+			}
+
+			await Console.Out.WriteLineAsync("data validation failed");
+			return View();
+		}
+
+
+
+		// GET: Userrs/Edit/5
+		public async Task<IActionResult> Edit(decimal? id)
         {
             if (id == null || _context.Userrs == null)
             {

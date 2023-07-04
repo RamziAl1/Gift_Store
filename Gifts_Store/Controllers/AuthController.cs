@@ -22,7 +22,6 @@ namespace Gifts_Store.Controllers
         [AllowAnonymous]
         public IActionResult Register()
         {
-            Console.WriteLine("In Register Get");
             ViewData["CategoryNames"] = new SelectList(_context.Categories, "Id", "CategoryName");
             return View();
         }
@@ -41,11 +40,14 @@ namespace Gifts_Store.Controllers
 				ModelState.AddModelError("RoleError", "Role is required.");
 			}
 
-			if (string.IsNullOrEmpty(catId))
+			if (role != null && role == "2" && string.IsNullOrEmpty(catId))
 			{
 				ModelState.AddModelError("CatIdError", "Category is required.");
 			}
-
+            else
+            {
+                ModelState.Remove("catId");
+            }
 
 			if (ModelState.IsValid)
             {
