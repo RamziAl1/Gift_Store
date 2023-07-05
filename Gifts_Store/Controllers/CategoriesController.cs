@@ -102,12 +102,11 @@ namespace Gifts_Store.Controllers
 
             if (ModelState.IsValid)
             {
-                decimal? DBCategoryId = _context.Categories
+                var DBCategory = _context.Categories
                     .Where(x => x.CategoryName.ToLower() == category.CategoryName.ToLower())
-                    .Select(x => x.Id)
-                    .SingleOrDefault();
+                    .Select(x => x.Id);
 
-                if(DBCategoryId != null && DBCategoryId != category.Id)
+                if(DBCategory != null && DBCategory.Count() != 0 &&  DBCategory.Single() != category.Id)
                 {
                     TempData["ErrorMessage"] = "Category name already exists.";
                     return View(category);

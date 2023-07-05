@@ -97,7 +97,7 @@ namespace Gifts_Store.Controllers
 			var giftId = HttpContext.Session.GetInt32("newGiftId");
 			if (giftId == null)
 				return NotFound("giftId is null");
-			HttpContext.Session.Remove("newGiftId");
+			
 			var gift = await _context.Gifts.Include(x => x.Category).SingleOrDefaultAsync(x => x.Id == giftId);
 			if (gift == null)
 			{
@@ -119,6 +119,7 @@ namespace Gifts_Store.Controllers
 				await _context.SaveChangesAsync();
 
 				TempData["OrderRequestStatus"] = "Order Successful";
+				HttpContext.Session.Remove("newGiftId");
 
 				return RedirectToAction(nameof(BrowseGifts));
 			}
@@ -149,6 +150,25 @@ namespace Gifts_Store.Controllers
             var ordersInCart = query.ToList();
             return View(ordersInCart);
         }
+
+        public async Task<IActionResult> RemoveFromCart(decimal? id)
+        {
+            if (id == null)
+                return NotFound("passed orderId is null in controller action");
+
+            var order = await _context.Orderrs.SingleOrDefaultAsync(x => x.Id == id);
+
+            if (order == null)
+            {
+                return NotFound("Order with passed Id not found");
+            }
+
+            _context.Remove(order);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(MyCart));
+        }
+
 
         public async Task<IActionResult> Checkout()
         {
@@ -249,12 +269,6 @@ namespace Gifts_Store.Controllers
 
             _context.Remove(order);
             await _context.SaveChangesAsync();
-            TempData.Remove("removeItemFromCart");
-            if (TempData["removeItemFromCart"] != null)
-            {
-                TempData.Remove("removeItemFromCart");
-                return RedirectToAction(nameof(MyCart));
-            }
 				
 			return RedirectToAction(nameof(MyOrders));
         }
@@ -511,7 +525,7 @@ namespace Gifts_Store.Controllers
                     return NotFound();
                 }
             }
-            return RedirectToAction(nameof(MyProfile));
+            return View(user);
         }
 
         [HttpPost]

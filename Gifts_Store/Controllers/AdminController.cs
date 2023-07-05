@@ -330,7 +330,7 @@ namespace Gifts_Store.Controllers
                     return NotFound();
                 }
             }
-            return RedirectToAction(nameof(MyProfile));
+            return View(user);
         }
 
         [HttpPost]

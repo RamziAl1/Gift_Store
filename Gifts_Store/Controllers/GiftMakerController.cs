@@ -2,9 +2,11 @@
 using Gifts_Store.Models;
 using Gifts_Store.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
+using System.Data;
 using System.Text;
 
 namespace Gifts_Store.Controllers
@@ -428,6 +430,12 @@ namespace Gifts_Store.Controllers
                 if (model == null)
                     return NotFound();
 
+                var giftMaker = _context.GiftMakers.Include(x => x.Category).FirstOrDefault(x => x.Id == HttpContext.Session.GetInt32("MakerId"));
+                if (giftMaker == null || giftMaker.Category == null)
+                    return NotFound();
+
+                ViewBag.categoryName = giftMaker.Category.CategoryName;
+
                 return View(model);
             }
             return View();
@@ -435,6 +443,12 @@ namespace Gifts_Store.Controllers
 
         public IActionResult EditProfile()
         {
+            ViewData["CategoryNames"] = new SelectList(_context.Categories, "Id", "CategoryName");
+            var giftMaker = _context.GiftMakers.Include(x => x.Category).FirstOrDefault(x => x.Id == HttpContext.Session.GetInt32("MakerId"));
+            if (giftMaker == null || giftMaker.Category == null)
+                return NotFound();
+            ViewBag.currentCategoryId = giftMaker.CategoryId;
+            ViewBag.currentCategory = giftMaker.Category.CategoryName;
             int? uLoginId = HttpContext.Session.GetInt32("userLoginId");
             var query = from u in _context.Userrs
                         join ul in _context.UserLogins on u.Id equals ul.UserId
@@ -467,8 +481,19 @@ namespace Gifts_Store.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> EditProfile([Bind("Id,Status,Fname,Lname,ImagePath,ImageFile")] Userr user)
+        public async Task<IActionResult> EditProfile([Bind("Id,Status,Fname,Lname,ImagePath,ImageFile")] Userr user, string catId)
         {
+            ViewData["CategoryNames"] = new SelectList(_context.Categories, "Id", "CategoryName");
+            var giftMaker = _context.GiftMakers.Include(x => x.Category).FirstOrDefault(x => x.Id == HttpContext.Session.GetInt32("MakerId"));
+            if (giftMaker == null || giftMaker.Category == null)
+                return NotFound();
+            
+
+            if (string.IsNullOrEmpty(catId))
+            {
+                ModelState.AddModelError("CategoryError", "Category is required.");
+            }
+
             if (ModelState.IsValid)
             {
                 try
@@ -508,16 +533,20 @@ namespace Gifts_Store.Controllers
                         // save path to model
                         user.ImagePath = fileName;
                     }
-
+                    giftMaker.CategoryId = decimal.Parse(catId);
+                    _context.Update(giftMaker);
                     _context.Update(user);
                     await _context.SaveChangesAsync();
+                    ViewBag.currentCategoryId = giftMaker.CategoryId;
+                    ViewBag.currentCategory = _context.Categories.SingleOrDefault(x => x.Id == giftMaker.CategoryId).CategoryName;
                 }
                 catch (DbUpdateConcurrencyException)
                 {
                     return NotFound();
                 }
             }
-            return RedirectToAction(nameof(MyProfile));
+
+            return View(user);
         }
 
         [HttpPost]

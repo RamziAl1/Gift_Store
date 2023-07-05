@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "TVRBp/IcE8z9KP5oYTdl9Ywh6KrAwhhxP+yDr0prp+o=",
+  "Hash": "BoKzNTqS1RGbt1uK6NiqnsYTYFnGEObBD5WHFXTJIPE=",
   "Source": "Gifts_Store",
   "BasePath": "_content/Gifts_Store",
   "Mode": "Default",
@@ -46189,6 +46189,23 @@
       "OriginalItemSpec": "wwwroot\\HomeAssets\\scss\\theme\\_variables.scss"
     },
     {
+      "Identity": "F:\\TAH\\0) First project\\Gifts_Store\\Gifts_Store\\wwwroot\\images\\023e08c5-74d8-40a3-a859-7c48f98835fb_brown cowboy hat.jpg",
+      "SourceId": "Gifts_Store",
+      "SourceType": "Discovered",
+      "ContentRoot": "F:\\TAH\\0) First project\\Gifts_Store\\Gifts_Store\\wwwroot\\",
+      "BasePath": "_content/Gifts_Store",
+      "RelativePath": "images/023e08c5-74d8-40a3-a859-7c48f98835fb_brown cowboy hat.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\023e08c5-74d8-40a3-a859-7c48f98835fb_brown cowboy hat.jpg"
+    },
+    {
       "Identity": "F:\\TAH\\0) First project\\Gifts_Store\\Gifts_Store\\wwwroot\\images\\0c424c58-fe99-43e7-89fc-3773abba89e6_Black bowler hatt.jpg",
       "SourceId": "Gifts_Store",
       "SourceType": "Discovered",
@@ -46206,23 +46223,6 @@
       "OriginalItemSpec": "wwwroot\\images\\0c424c58-fe99-43e7-89fc-3773abba89e6_Black bowler hatt.jpg"
     },
     {
-      "Identity": "F:\\TAH\\0) First project\\Gifts_Store\\Gifts_Store\\wwwroot\\images\\170f75cf-4204-4f73-a8f1-4c3282aff412_profilepic1.jpg",
-      "SourceId": "Gifts_Store",
-      "SourceType": "Discovered",
-      "ContentRoot": "F:\\TAH\\0) First project\\Gifts_Store\\Gifts_Store\\wwwroot\\",
-      "BasePath": "_content/Gifts_Store",
-      "RelativePath": "images/170f75cf-4204-4f73-a8f1-4c3282aff412_profilepic1.jpg",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\images\\170f75cf-4204-4f73-a8f1-4c3282aff412_profilepic1.jpg"
-    },
-    {
       "Identity": "F:\\TAH\\0) First project\\Gifts_Store\\Gifts_Store\\wwwroot\\images\\21804a1f-dd92-47db-874d-a2547b0e8a1f_Screenshot 2023-07-02 191107.png",
       "SourceId": "Gifts_Store",
       "SourceType": "Discovered",
@@ -46238,6 +46238,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\21804a1f-dd92-47db-874d-a2547b0e8a1f_Screenshot 2023-07-02 191107.png"
+    },
+    {
+      "Identity": "F:\\TAH\\0) First project\\Gifts_Store\\Gifts_Store\\wwwroot\\images\\380ebd8d-5efa-4d8b-9752-cd40a765cbc1_brown cowboy hat.jpg",
+      "SourceId": "Gifts_Store",
+      "SourceType": "Discovered",
+      "ContentRoot": "F:\\TAH\\0) First project\\Gifts_Store\\Gifts_Store\\wwwroot\\",
+      "BasePath": "_content/Gifts_Store",
+      "RelativePath": "images/380ebd8d-5efa-4d8b-9752-cd40a765cbc1_brown cowboy hat.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\380ebd8d-5efa-4d8b-9752-cd40a765cbc1_brown cowboy hat.jpg"
     },
     {
       "Identity": "F:\\TAH\\0) First project\\Gifts_Store\\Gifts_Store\\wwwroot\\images\\4a52fc64-75e3-4b70-87a4-7496fc60abbd_brown cowboy hat.jpg",
@@ -46274,6 +46291,23 @@
       "OriginalItemSpec": "wwwroot\\images\\61423f4a-a90e-4af8-8755-c57d563e777a_black leather dress shoes.jpg"
     },
     {
+      "Identity": "F:\\TAH\\0) First project\\Gifts_Store\\Gifts_Store\\wwwroot\\images\\62dccf76-9e49-4bac-b800-97aa80129260_profilepic2.jpg",
+      "SourceId": "Gifts_Store",
+      "SourceType": "Discovered",
+      "ContentRoot": "F:\\TAH\\0) First project\\Gifts_Store\\Gifts_Store\\wwwroot\\",
+      "BasePath": "_content/Gifts_Store",
+      "RelativePath": "images/62dccf76-9e49-4bac-b800-97aa80129260_profilepic2.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\62dccf76-9e49-4bac-b800-97aa80129260_profilepic2.jpg"
+    },
+    {
       "Identity": "F:\\TAH\\0) First project\\Gifts_Store\\Gifts_Store\\wwwroot\\images\\6464c529-3247-4d80-9f0a-ef8603bdd498_store_logo.jpg",
       "SourceId": "Gifts_Store",
       "SourceType": "Discovered",
@@ -46308,12 +46342,12 @@
       "OriginalItemSpec": "wwwroot\\images\\66c5dac9-02f2-41ed-8114-8e171fe77462_Black cap.jpg"
     },
     {
-      "Identity": "F:\\TAH\\0) First project\\Gifts_Store\\Gifts_Store\\wwwroot\\images\\6b661617-5ab2-44f1-b7d6-41f27b66222f_Screenshot_2022.09.18_09.28.36.098.png",
+      "Identity": "F:\\TAH\\0) First project\\Gifts_Store\\Gifts_Store\\wwwroot\\images\\7bd9ce3c-7bc6-4068-a378-8da2469d2be4_profilepic1.jpg",
       "SourceId": "Gifts_Store",
       "SourceType": "Discovered",
       "ContentRoot": "F:\\TAH\\0) First project\\Gifts_Store\\Gifts_Store\\wwwroot\\",
       "BasePath": "_content/Gifts_Store",
-      "RelativePath": "images/6b661617-5ab2-44f1-b7d6-41f27b66222f_Screenshot_2022.09.18_09.28.36.098.png",
+      "RelativePath": "images/7bd9ce3c-7bc6-4068-a378-8da2469d2be4_profilepic1.jpg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -46322,24 +46356,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\images\\6b661617-5ab2-44f1-b7d6-41f27b66222f_Screenshot_2022.09.18_09.28.36.098.png"
-    },
-    {
-      "Identity": "F:\\TAH\\0) First project\\Gifts_Store\\Gifts_Store\\wwwroot\\images\\8c4394f5-e80c-483f-9f6f-ab1502c4f949_Screenshot_2022.09.18_09.28.12.508.png",
-      "SourceId": "Gifts_Store",
-      "SourceType": "Discovered",
-      "ContentRoot": "F:\\TAH\\0) First project\\Gifts_Store\\Gifts_Store\\wwwroot\\",
-      "BasePath": "_content/Gifts_Store",
-      "RelativePath": "images/8c4394f5-e80c-483f-9f6f-ab1502c4f949_Screenshot_2022.09.18_09.28.12.508.png",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\images\\8c4394f5-e80c-483f-9f6f-ab1502c4f949_Screenshot_2022.09.18_09.28.12.508.png"
+      "OriginalItemSpec": "wwwroot\\images\\7bd9ce3c-7bc6-4068-a378-8da2469d2be4_profilepic1.jpg"
     },
     {
       "Identity": "F:\\TAH\\0) First project\\Gifts_Store\\Gifts_Store\\wwwroot\\images\\8f14ba25-8506-48b4-8257-719332eda141_Black no Bull.jpg",
@@ -46359,12 +46376,12 @@
       "OriginalItemSpec": "wwwroot\\images\\8f14ba25-8506-48b4-8257-719332eda141_Black no Bull.jpg"
     },
     {
-      "Identity": "F:\\TAH\\0) First project\\Gifts_Store\\Gifts_Store\\wwwroot\\images\\93fa6f72-c7d1-40d5-8c79-e410553b2c04_profilepic2.jpg",
+      "Identity": "F:\\TAH\\0) First project\\Gifts_Store\\Gifts_Store\\wwwroot\\images\\9651eb44-796d-4394-b06e-0a537e6c7c68_profilepic4.jpg",
       "SourceId": "Gifts_Store",
       "SourceType": "Discovered",
       "ContentRoot": "F:\\TAH\\0) First project\\Gifts_Store\\Gifts_Store\\wwwroot\\",
       "BasePath": "_content/Gifts_Store",
-      "RelativePath": "images/93fa6f72-c7d1-40d5-8c79-e410553b2c04_profilepic2.jpg",
+      "RelativePath": "images/9651eb44-796d-4394-b06e-0a537e6c7c68_profilepic4.jpg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -46373,15 +46390,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\images\\93fa6f72-c7d1-40d5-8c79-e410553b2c04_profilepic2.jpg"
+      "OriginalItemSpec": "wwwroot\\images\\9651eb44-796d-4394-b06e-0a537e6c7c68_profilepic4.jpg"
     },
     {
-      "Identity": "F:\\TAH\\0) First project\\Gifts_Store\\Gifts_Store\\wwwroot\\images\\ab88347f-07d2-46a8-8e00-1da53fb0511f_profilepic5.jpg",
+      "Identity": "F:\\TAH\\0) First project\\Gifts_Store\\Gifts_Store\\wwwroot\\images\\beb27688-d34e-45ac-a9df-67c499ee904a_Black cap.jpg",
       "SourceId": "Gifts_Store",
       "SourceType": "Discovered",
       "ContentRoot": "F:\\TAH\\0) First project\\Gifts_Store\\Gifts_Store\\wwwroot\\",
       "BasePath": "_content/Gifts_Store",
-      "RelativePath": "images/ab88347f-07d2-46a8-8e00-1da53fb0511f_profilepic5.jpg",
+      "RelativePath": "images/beb27688-d34e-45ac-a9df-67c499ee904a_Black cap.jpg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -46390,7 +46407,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\images\\ab88347f-07d2-46a8-8e00-1da53fb0511f_profilepic5.jpg"
+      "OriginalItemSpec": "wwwroot\\images\\beb27688-d34e-45ac-a9df-67c499ee904a_Black cap.jpg"
     },
     {
       "Identity": "F:\\TAH\\0) First project\\Gifts_Store\\Gifts_Store\\wwwroot\\images\\c2269e08-508a-481a-bca8-f11a785af721_Black magician hat.jpg",
@@ -46427,12 +46444,12 @@
       "OriginalItemSpec": "wwwroot\\images\\d1a39b3e-eb91-4997-a7ab-f70b9ffcb3b2_gift_store_bg.jpg"
     },
     {
-      "Identity": "F:\\TAH\\0) First project\\Gifts_Store\\Gifts_Store\\wwwroot\\images\\e30482bb-d945-41c8-8af0-a9ccc8dd968a_profilepic4.jpg",
+      "Identity": "F:\\TAH\\0) First project\\Gifts_Store\\Gifts_Store\\wwwroot\\images\\f7a9b098-bb57-47df-8a50-79687204331b_Black bowler hatt.jpg",
       "SourceId": "Gifts_Store",
       "SourceType": "Discovered",
       "ContentRoot": "F:\\TAH\\0) First project\\Gifts_Store\\Gifts_Store\\wwwroot\\",
       "BasePath": "_content/Gifts_Store",
-      "RelativePath": "images/e30482bb-d945-41c8-8af0-a9ccc8dd968a_profilepic4.jpg",
+      "RelativePath": "images/f7a9b098-bb57-47df-8a50-79687204331b_Black bowler hatt.jpg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -46441,7 +46458,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\images\\e30482bb-d945-41c8-8af0-a9ccc8dd968a_profilepic4.jpg"
+      "OriginalItemSpec": "wwwroot\\images\\f7a9b098-bb57-47df-8a50-79687204331b_Black bowler hatt.jpg"
     },
     {
       "Identity": "F:\\TAH\\0) First project\\Gifts_Store\\Gifts_Store\\wwwroot\\js\\site.js",

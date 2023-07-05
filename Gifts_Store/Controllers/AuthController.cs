@@ -23,7 +23,10 @@ namespace Gifts_Store.Controllers
         public IActionResult Register()
         {
             ViewData["CategoryNames"] = new SelectList(_context.Categories, "Id", "CategoryName");
-            return View();
+            if (TempData.ContainsKey("SuccessMessage"))
+                TempData.Remove("SuccessMessage");
+
+			return View();
         }
 
         [HttpPost]
@@ -31,8 +34,6 @@ namespace Gifts_Store.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Register([Bind("UserName, Password, Email, Fname, Lname, ImageFile")] SignUpViewModel newUserData, string role, string catId)
         {
-            await Console.Out.WriteLineAsync("In Register POST");
-
 			ViewData["CategoryNames"] = new SelectList(_context.Categories, "Id", "CategoryName");
 
 			if (string.IsNullOrEmpty(role))
@@ -104,7 +105,6 @@ namespace Gifts_Store.Controllers
                     _context.Add(giftSender);
 					await _context.SaveChangesAsync();
 				}
-                await Console.Out.WriteLineAsync("roleid= " + roleId);
                 // save the user_login entry 
                 UserLogin login = new();
                 login.RoleId = roleId;
@@ -134,20 +134,7 @@ namespace Gifts_Store.Controllers
         public IActionResult Login([Bind("UserName, Password")] UserLogin uLogin)
         {
             ModelState.Remove("Email");
-			foreach (var key in ModelState.Keys)
-			{
-				if (ModelState.TryGetValue(key, out var entry) && entry.Errors.Count > 0)
-				{
-					foreach (var error in entry.Errors)
-					{
-						var errorMessage = error.ErrorMessage;
-						var attributeName = key;
 
-						Console.WriteLine($"Error: {errorMessage} (Attribute: {attributeName})");
-					}
-				}
-			}
-            Console.WriteLine("------------in login post---------------");
             if (ModelState.IsValid)
             {
                 var auth = _context.UserLogins.Where(x => x.UserName == uLogin.UserName && x.Password == uLogin.Password).SingleOrDefault();
@@ -187,7 +174,6 @@ namespace Gifts_Store.Controllers
 										   join gm in _context.GiftMakers on u.Id equals gm.UserId
 										   where ul.Id == auth.Id
                                            select gm.Id).FirstOrDefault();
-                            Console.WriteLine("in login makerId= " + makerId );
 							HttpContext.Session.SetInt32("MakerId", (int)makerId);
 
 							return RedirectToAction("Home", "Home");
