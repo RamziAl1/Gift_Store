@@ -17,6 +17,7 @@
 <!-- End Banner Area -->
 @if (TempData["OrderRequestStatus"] != null)
 {
+	TempData.Remove("OrderRequestStatus");
 	<section class="order_details section_gap">
 		<div class="container">
 			<h3 class="title_confirmation">Thank you. Your Item has been added to the cart.</h3>

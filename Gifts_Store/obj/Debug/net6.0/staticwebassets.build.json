@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "JxSVpDcHbjTqEb7UbMwLfWQPB0udQ6+HLOz/xR1JUfA=",
+  "Hash": "TVRBp/IcE8z9KP5oYTdl9Ywh6KrAwhhxP+yDr0prp+o=",
   "Source": "Gifts_Store",
   "BasePath": "_content/Gifts_Store",
   "Mode": "Default",
@@ -46240,23 +46240,6 @@
       "OriginalItemSpec": "wwwroot\\images\\21804a1f-dd92-47db-874d-a2547b0e8a1f_Screenshot 2023-07-02 191107.png"
     },
     {
-      "Identity": "F:\\TAH\\0) First project\\Gifts_Store\\Gifts_Store\\wwwroot\\images\\261364ae-98dc-4968-a314-44d4ffde18e5_Screenshot_2022.09.18_11.28.30.609.png",
-      "SourceId": "Gifts_Store",
-      "SourceType": "Discovered",
-      "ContentRoot": "F:\\TAH\\0) First project\\Gifts_Store\\Gifts_Store\\wwwroot\\",
-      "BasePath": "_content/Gifts_Store",
-      "RelativePath": "images/261364ae-98dc-4968-a314-44d4ffde18e5_Screenshot_2022.09.18_11.28.30.609.png",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\images\\261364ae-98dc-4968-a314-44d4ffde18e5_Screenshot_2022.09.18_11.28.30.609.png"
-    },
-    {
       "Identity": "F:\\TAH\\0) First project\\Gifts_Store\\Gifts_Store\\wwwroot\\images\\4a52fc64-75e3-4b70-87a4-7496fc60abbd_brown cowboy hat.jpg",
       "SourceId": "Gifts_Store",
       "SourceType": "Discovered",
@@ -46323,6 +46306,40 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\66c5dac9-02f2-41ed-8114-8e171fe77462_Black cap.jpg"
+    },
+    {
+      "Identity": "F:\\TAH\\0) First project\\Gifts_Store\\Gifts_Store\\wwwroot\\images\\6b661617-5ab2-44f1-b7d6-41f27b66222f_Screenshot_2022.09.18_09.28.36.098.png",
+      "SourceId": "Gifts_Store",
+      "SourceType": "Discovered",
+      "ContentRoot": "F:\\TAH\\0) First project\\Gifts_Store\\Gifts_Store\\wwwroot\\",
+      "BasePath": "_content/Gifts_Store",
+      "RelativePath": "images/6b661617-5ab2-44f1-b7d6-41f27b66222f_Screenshot_2022.09.18_09.28.36.098.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\6b661617-5ab2-44f1-b7d6-41f27b66222f_Screenshot_2022.09.18_09.28.36.098.png"
+    },
+    {
+      "Identity": "F:\\TAH\\0) First project\\Gifts_Store\\Gifts_Store\\wwwroot\\images\\8c4394f5-e80c-483f-9f6f-ab1502c4f949_Screenshot_2022.09.18_09.28.12.508.png",
+      "SourceId": "Gifts_Store",
+      "SourceType": "Discovered",
+      "ContentRoot": "F:\\TAH\\0) First project\\Gifts_Store\\Gifts_Store\\wwwroot\\",
+      "BasePath": "_content/Gifts_Store",
+      "RelativePath": "images/8c4394f5-e80c-483f-9f6f-ab1502c4f949_Screenshot_2022.09.18_09.28.12.508.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\8c4394f5-e80c-483f-9f6f-ab1502c4f949_Screenshot_2022.09.18_09.28.12.508.png"
     },
     {
       "Identity": "F:\\TAH\\0) First project\\Gifts_Store\\Gifts_Store\\wwwroot\\images\\8f14ba25-8506-48b4-8257-719332eda141_Black no Bull.jpg",

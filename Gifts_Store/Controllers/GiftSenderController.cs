@@ -249,9 +249,13 @@ namespace Gifts_Store.Controllers
 
             _context.Remove(order);
             await _context.SaveChangesAsync();
-
-            if(TempData["removeItemFromCart"] != null)
-				return RedirectToAction(nameof(MyCart));
+            TempData.Remove("removeItemFromCart");
+            if (TempData["removeItemFromCart"] != null)
+            {
+                TempData.Remove("removeItemFromCart");
+                return RedirectToAction(nameof(MyCart));
+            }
+				
 			return RedirectToAction(nameof(MyOrders));
         }
 
